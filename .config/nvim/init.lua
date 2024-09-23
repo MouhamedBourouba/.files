@@ -74,6 +74,14 @@ require("lazy").setup({
     opts = {},
   },
   {
+    "stevearc/oil.nvim",
+    config = function ()
+      require("oil").setup();
+      vim.keymap.set("n", "-", "<cmd>Oil<CR>")
+    end
+  },
+  -- LSP STUFF
+  {
     {'VonHeikemen/lsp-zero.nvim', branch = 'v4.x'},
     {'neovim/nvim-lspconfig'},
     {'hrsh7th/cmp-nvim-lsp'},
@@ -113,15 +121,14 @@ vim.keymap.set('i', '<C-d>', '<cmd>normal "lyy"lp<CR>')
 vim.keymap.set('n', '<C-a>', 'ggvG')
 vim.keymap.set('n', '<C-Down>', '<C-d>zz')
 vim.keymap.set('n', '<C-Up>', '<C-u>zz')
+vim.keymap.set('n', '<C-w>', '<cmd>wa<CR>')
 
 -- registers
 vim.keymap.set('n', '<C-m>', '"_')
-vim.keymap.set('n', '<C-s>', '"+')
+vim.keymap.set({'n', 'v'}, '<C-s>', '"+')
 
-vim.keymap.set('n', '<S-Up>', "")
-vim.keymap.set('n', '<S-Down>', "")
-vim.keymap.set('i', '<S-Up>', "")
-vim.keymap.set('i', '<S-Down>', "")
+vim.keymap.set({'v','i','n'}, '<S-Up>', '')
+vim.keymap.set({'v','i','n'}, '<S-Down>', "")
 
 --LSP
 local lsp_zero = require('lsp-zero')
