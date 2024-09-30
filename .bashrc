@@ -78,3 +78,4 @@ eb() {
   $EDITOR ~/.bashrc
   source ~/.bashrc
 }
+alias ps="sudo ./pppwn -i enp3s0 --stage1 stage1.bin --stage2 stage2.bin -a"
