@@ -27,7 +27,7 @@ normal.family = "IosevkaNerdFont"
 bold.family = "IosevkaNerdFont"
 italic.family = "IosevkaNerdFont"
 bold_italic.family = "IosevkaNerdFont"
-size = 4
+size = 3.85
 [colors.primary]
 background = "#24273a"
 foreground = "#cad3f5"

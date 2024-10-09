@@ -82,6 +82,7 @@ require("lazy").setup({
   },
   -- LSP STUFF
   {
+    {'L3MON4D3/LuaSnip', version = "v2.3", build = "make install_jsregexp" },
     {'VonHeikemen/lsp-zero.nvim', branch = 'v4.x'},
     {'neovim/nvim-lspconfig'},
     {'hrsh7th/cmp-nvim-lsp'},
@@ -119,9 +120,11 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 vim.keymap.set('n', '<C-b>', '<cmd>wa<CR><cmd>make<CR>')
 vim.keymap.set('i', '<C-d>', '<cmd>normal "lyy"lp<CR>')
 vim.keymap.set('n', '<C-a>', 'ggvG')
-vim.keymap.set('n', '<C-Down>', '<C-d>zz')
-vim.keymap.set('n', '<C-Up>', '<C-u>zz')
-vim.keymap.set('n', '<C-w>', '<cmd>wa<CR>')
+vim.keymap.set({'n', 'v'}, '<C-Down>', '<C-d>zz')
+vim.keymap.set({'n', 'v'}, '<C-Up>', '<C-u>zz')
+vim.keymap.set('n', 'S', '<cmd>wa<CR>')
+vim.keymap.set('n', '<C-w>f', '<C-w>|')
+
 
 -- registers
 vim.keymap.set('n', '<C-m>', '"_')
@@ -142,6 +145,8 @@ local lsp_attach = function(client, bufnr)
   vim.keymap.set('n', 'gd', fzf.lsp_definitions, opts)
   vim.keymap.set('n', 'gD', fzf.lsp_declarations, opts)
   vim.keymap.set('n', 'gi', fzf.lsp_implementations, opts)
+  vim.keymap.set('n', 'ds', fzf.lsp_document_symbols, opts)
+  vim.keymap.set('n', 'ws', fzf.lsp_workspace_symbols, opts)
   vim.keymap.set('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
   vim.keymap.set('n', 'gr', fzf.lsp_references, opts)
   vim.keymap.set({"n", "i"}, '<C-h>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
@@ -157,6 +162,8 @@ lsp_zero.extend_lspconfig({
 
 local cmp = require('cmp')
 local cmp_format = require('lsp-zero').cmp_format({details = true})
+local cmp_action = require('lsp-zero').cmp_action()
+
 cmp.setup({
   sources = {
     {name = 'nvim_lsp'},
@@ -164,7 +171,15 @@ cmp.setup({
   formatting = cmp_format,
     mapping = cmp.mapping.preset.insert({
     ['<CR>'] = cmp.mapping.confirm({select = true}),
+    ['<Tab>'] = cmp_action.luasnip_supertab(),
+    ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
   }),
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
 })
+
 require('lspconfig').lua_ls.setup({})
 require('lspconfig').clangd.setup({})

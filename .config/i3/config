@@ -1,6 +1,6 @@
 set $mod Mod4
 
-font pango:IosevkaNerdFont 9
+font pango:IosevkaNerdFont 0
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
@@ -14,7 +14,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+q kill
-bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+d exec rofi -show drun
 
 bindsym $mod+j focus left
 bindsym $mod+k focus down
@@ -110,10 +110,10 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 bar {
-        status_command i3status
+  font pango:NotoSans 7
+  status_command i3status
 }
 
 default_border pixel 1
-
 exec xrandr --output DisplayPort-0 --mode 1920x1080
 exec feh --bg-fill ~/Pictures/archlinux.png
