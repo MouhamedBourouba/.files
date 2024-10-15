@@ -68,14 +68,21 @@ alias ls="exa --color=auto"
 alias la="exa -alh"
 
 export EDITOR="nvim"
-alias v="$EDITOR"
 
 alias ev="$EDITOR ~/.config/nvim/init.lua"
 alias ei="$EDITOR ~/.config/i3/config"
 alias dd="cd ~/dev/"
 
+v() {
+  if [[ -f Session.vim ]]; then
+    nvim -S Session.vim "$@"
+  else
+    nvim "$@"
+  fi
+}
 eb() {
   $EDITOR ~/.bashrc
   source ~/.bashrc
 }
+
 alias ps="sudo ./pppwn -i enp3s0 --stage1 stage1.bin --stage2 stage2.bin -a"

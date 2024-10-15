@@ -119,9 +119,8 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 vim.keymap.set('n', '<C-b>', '<cmd>wa<CR><cmd>make<CR>')
 vim.keymap.set('i', '<C-d>', '<cmd>normal "lyy"lp<CR>')
 vim.keymap.set('n', '<C-a>', 'ggvG')
-vim.keymap.set('n', '<C-Down>', '<C-d>zz')
-vim.keymap.set('n', '<C-Up>', '<C-u>zz')
-vim.keymap.set('n', '<C-w>', '<cmd>wa<CR>')
+vim.keymap.set({'n', 'v', 'i'}, '<C-Down>', '<C-d>zz')
+vim.keymap.set({'n', 'v', 'i'}, '<C-Up>', '<C-u>zz')
 
 -- registers
 vim.keymap.set('n', '<C-m>', '"_')
@@ -129,6 +128,7 @@ vim.keymap.set({'n', 'v'}, '<C-s>', '"+')
 
 vim.keymap.set({'v','i','n'}, '<S-Up>', '')
 vim.keymap.set({'v','i','n'}, '<S-Down>', "")
+vim.keymap.set('n', 'gb', '<cmd>ls<CR>:buffer ')
 
 --LSP
 local lsp_zero = require('lsp-zero')
@@ -142,6 +142,8 @@ local lsp_attach = function(client, bufnr)
   vim.keymap.set('n', 'gd', fzf.lsp_definitions, opts)
   vim.keymap.set('n', 'gD', fzf.lsp_declarations, opts)
   vim.keymap.set('n', 'gi', fzf.lsp_implementations, opts)
+  vim.keymap.set('n', 'ds', fzf.lsp_document_symbols, opts)
+  vim.keymap.set('n', 'ws', fzf.lsp_workspace_symbols, opts)
   vim.keymap.set('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
   vim.keymap.set('n', 'gr', fzf.lsp_references, opts)
   vim.keymap.set({"n", "i"}, '<C-h>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
