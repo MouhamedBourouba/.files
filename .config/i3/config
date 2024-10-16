@@ -1,6 +1,6 @@
 set $mod Mod4
 
-font pango:IosevkaNerdFont 0
+font pango:Sans 0
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
@@ -116,4 +116,5 @@ bar {
 
 default_border pixel 1
 exec xrandr --output DisplayPort-0 --mode 1920x1080
-exec feh --bg-fill ~/Pictures/archlinux.png
+exec_always ~/dotfiles/.config/wallpaper.sh
+exec qbittorrent
