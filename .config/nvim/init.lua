@@ -1,4 +1,8 @@
 ---@diagnostic disable: undefined-global
+
+-- neovide
+vim.opt.guifont = { "Iosevka Nerd Font", ":h3.85" }
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -43,17 +47,25 @@ require("lazy").setup({
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("fzf-lua").setup({})
-      vim.keymap.set('n', '<C-f>', require("fzf-lua").files)
+      vim.keymap.set('n', '<C-f>', require("fzf-lua").git_files)
+      vim.keymap.set('n', '<leader>f', require("fzf-lua").git_files)
       vim.keymap.set('n', '<C-o>', require("fzf-lua").buffers)
     end
   },
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
-    config = function()
-      vim.cmd("colorscheme catppuccin")
-    end
+    {
+      "ellisonleao/gruvbox.nvim",
+      -- config = function()
+      --   vim.cmd("colorscheme gruvbox")
+      -- end
+    },
+    {
+      "catppuccin/nvim",
+      name = "catppuccin",
+      config = function()
+        vim.cmd("colorscheme catppuccin")
+      end
+    }
   },
   {
     "folke/zen-mode.nvim",
@@ -61,6 +73,7 @@ require("lazy").setup({
       require("zen-mode").setup({
         window = { width = .75 }
       })
+      vim.keymap.set('n', '<leader>z', '<cmd>Zen<CR>')
     end
   },
   {
@@ -132,7 +145,7 @@ vim.opt.smartcase = true
 -- Keep signcolumn on by default
 vim.opt.signcolumn = 'yes'
 -- Decrease update time
-vim.opt.updatetime = 250
+vim.opt.updatetime = 150
 -- view command output
 vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
@@ -141,16 +154,13 @@ vim.opt.scrolloff = 20
 vim.opt.splitright = true
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-vim.keymap.set('n', '<leader>z', '<cmd>Zen<CR>')
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 vim.keymap.set('n', '<C-b>', '<cmd>wa<CR><cmd>make<CR>')
-vim.keymap.set('i', '<C-d>', '<cmd>normal "lyy"lp<CR>')
-vim.keymap.set('n', '<C-a>', 'ggvG')
+
 vim.keymap.set({ 'n', 'v', 'i' }, '<C-Down>', '<C-d>zz')
 vim.keymap.set({ 'n', 'v', 'i' }, '<C-Up>', '<C-u>zz')
 
 -- registers
-vim.keymap.set('n', '<C-m>', '"_')
+vim.keymap.set({ 'n', 'v' }, '<C-ù>', '"_')
 vim.keymap.set({ 'n', 'v' }, '<C-s>', '"+')
 
 vim.keymap.set({ 'v', 'i', 'n' }, '<S-Up>', '')
@@ -159,23 +169,25 @@ vim.keymap.set({ "n", "v" }, '<C-p>', '<cmd>ls<CR>:buffer ')
 
 --LSP
 local lsp_zero = require('lsp-zero')
-
 ---@diagnostic disable-next-line: unused-local
 local lsp_attach = function(client, bufnr)
   local opts = { buffer = bufnr }
   local fzf = require("fzf-lua")
 
   vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-  vim.keymap.set('n', 'gd', fzf.lsp_definitions, opts)
-  vim.keymap.set('n', 'gD', fzf.lsp_declarations, opts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
   vim.keymap.set('n', 'gi', fzf.lsp_implementations, opts)
   vim.keymap.set('n', 'ds', fzf.lsp_document_symbols, opts)
   vim.keymap.set('n', 'ws', fzf.lsp_workspace_symbols, opts)
-  vim.keymap.set('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
+  vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, opts)
   vim.keymap.set('n', 'gr', fzf.lsp_references, opts)
   vim.keymap.set({ "n", "i" }, '<C-h>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-  vim.keymap.set('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+  vim.keymap.set('n', '<leader>cn', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
   vim.keymap.set('n', '<leader>ca', fzf.lsp_code_actions, opts)
+
+  vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, opts)
+  vim.keymap.set('n', '<leader>e', fzf.lsp_document_diagnostics, opts)
 end
 
 lsp_zero.extend_lspconfig({
@@ -223,4 +235,3 @@ require('lspconfig').clangd.setup({})
 require('lspconfig').ts_ls.setup({})
 require('lspconfig').gopls.setup({})
 require('lspconfig').html.setup({})
-require('lspconfig').css.setup({})
