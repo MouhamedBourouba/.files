@@ -21,6 +21,9 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   {
+    "mg979/vim-visual-multi"
+  },
+  {
     "stevearc/conform.nvim",
     config = function()
       require("conform").setup({
@@ -48,7 +51,7 @@ require("lazy").setup({
     config = function()
       require("fzf-lua").setup({})
       vim.keymap.set('n', '<C-f>', require("fzf-lua").git_files)
-      vim.keymap.set('n', '<leader>f', require("fzf-lua").git_files)
+      vim.keymap.set('n', '<C-*>', require("fzf-lua").files)
       vim.keymap.set('n', '<C-o>', require("fzf-lua").buffers)
     end
   },
@@ -73,7 +76,7 @@ require("lazy").setup({
       require("zen-mode").setup({
         window = { width = .75 }
       })
-      vim.keymap.set('n', '<leader>z', '<cmd>Zen<CR>')
+      vim.keymap.set('n', '<C-z>', '<cmd>Zen<CR>')
     end
   },
   {
@@ -119,12 +122,14 @@ require("lazy").setup({
   },
   -- LSP STUFF
   {
-    { 'VonHeikemen/lsp-zero.nvim',   branch = 'v4.x' },
+    { 'VonHeikemen/lsp-zero.nvim', branch = 'v4.x' },
     { 'neovim/nvim-lspconfig' },
     { 'hrsh7th/cmp-nvim-lsp' },
     { 'hrsh7th/nvim-cmp' },
-    { 'L3MON4D3/LuaSnip' },
-    { 'rafamadriz/friendly-snippets' }
+    {
+      'L3MON4D3/LuaSnip',
+      dependencies = { "rafamadriz/friendly-snippets" },
+    },
   }
 })
 
@@ -156,8 +161,8 @@ vim.opt.splitright = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<C-b>', '<cmd>wa<CR><cmd>make<CR>')
 
-vim.keymap.set({ 'n', 'v', 'i' }, '<C-Down>', '<C-d>zz')
-vim.keymap.set({ 'n', 'v', 'i' }, '<C-Up>', '<C-u>zz')
+vim.keymap.set({ 'n', 'v', 'i' }, '<C-j>', '<C-d>zz')
+vim.keymap.set({ 'n', 'v', 'i' }, '<C-k>', '<C-u>zz')
 
 -- registers
 vim.keymap.set({ 'n', 'v' }, '<C-ù>', '"_')
@@ -198,6 +203,7 @@ lsp_zero.extend_lspconfig({
 
 local cmp = require('cmp')
 local cmp_format = require('lsp-zero').cmp_format({ details = true })
+local ls = require('luasnip')
 
 require('luasnip.loaders.from_vscode').lazy_load()
 
@@ -217,21 +223,23 @@ cmp.setup({
   },
   snippet = {
     expand = function(args)
-      require('luasnip').lsp_expand(args.body)
+      ls.lsp_expand(args.body)
     end,
   },
 })
 
-vim.api.nvim_set_keymap('i', '<Tab>', [[luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' : '<Tab>']],
+vim.keymap.set('i', '<Tab>', [[luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' : '<Tab>']],
   { expr = true, silent = true })
-vim.api.nvim_set_keymap('s', '<Tab>', [[<cmd>lua require('luasnip').jump(1)<CR>]], { silent = true })
+vim.keymap.set('s', '<Tab>', [[<cmd>lua require('luasnip').jump(1)<CR>]], { silent = true })
 
-vim.api.nvim_set_keymap('i', '<S-Tab>', [[luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>']],
+vim.keymap.set('i', '<S-Tab>', [[luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>']],
   { expr = true, silent = true })
-vim.api.nvim_set_keymap('s', '<S-Tab>', [[<cmd>lua require('luasnip').jump(-1)<CR>]], { silent = true })
+vim.keymap.set('s', '<S-Tab>', [[<cmd>lua require('luasnip').jump(-1)<CR>]], { silent = true })
 
 require('lspconfig').lua_ls.setup({})
 require('lspconfig').clangd.setup({})
 require('lspconfig').ts_ls.setup({})
 require('lspconfig').gopls.setup({})
 require('lspconfig').html.setup({})
+require('lspconfig').cssls.setup({})
+require('lspconfig').emmet_ls.setup({})
