@@ -1,4 +1,8 @@
 ---@diagnostic disable: undefined-global
+
+-- neovide
+vim.opt.guifont = { "Iosevka Nerd Font", ":h3.85" }
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -17,6 +21,9 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   {
+    "mg979/vim-visual-multi"
+  },
+  {
     "stevearc/conform.nvim",
     config = function()
       require("conform").setup({
@@ -31,6 +38,8 @@ require("lazy").setup({
           cpp = { "clang-format" },
           h = { "clang-format" },
 
+          go = { "gofmt" },
+
           javascript = { "prettier", stop_after_first = true },
         },
       })
@@ -41,17 +50,25 @@ require("lazy").setup({
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("fzf-lua").setup({})
-      vim.keymap.set('n', '<C-f>', require("fzf-lua").files)
+      vim.keymap.set('n', '<C-f>', require("fzf-lua").git_files)
+      vim.keymap.set('n', '<C-*>', require("fzf-lua").files)
       vim.keymap.set('n', '<C-o>', require("fzf-lua").buffers)
     end
   },
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
-    config = function()
-      vim.cmd("colorscheme catppuccin")
-    end
+    {
+      "ellisonleao/gruvbox.nvim",
+      -- config = function()
+      --   vim.cmd("colorscheme gruvbox")
+      -- end
+    },
+    {
+      "catppuccin/nvim",
+      name = "catppuccin",
+      config = function()
+        vim.cmd("colorscheme catppuccin")
+      end
+    }
   },
   {
     "folke/zen-mode.nvim",
@@ -59,6 +76,7 @@ require("lazy").setup({
       require("zen-mode").setup({
         window = { width = .75 }
       })
+      vim.keymap.set('n', '<C-z>', '<cmd>Zen<CR>')
     end
   },
   {
@@ -90,24 +108,28 @@ require("lazy").setup({
     end
   },
   {
-    'stevearc/conform.nvim',
-    opts = {},
-  },
-  {
     "stevearc/oil.nvim",
     config = function()
       require("oil").setup();
       vim.keymap.set("n", "-", "<cmd>Oil<CR>")
     end
   },
+  {
+    "tpope/vim-fugitive",
+    config = function()
+      vim.keymap.set("n", "<C-g>", ":Git ")
+    end
+  },
   -- LSP STUFF
   {
-    { 'VonHeikemen/lsp-zero.nvim',   branch = 'v4.x' },
+    { 'VonHeikemen/lsp-zero.nvim', branch = 'v4.x' },
     { 'neovim/nvim-lspconfig' },
     { 'hrsh7th/cmp-nvim-lsp' },
     { 'hrsh7th/nvim-cmp' },
-    { 'L3MON4D3/LuaSnip' },
-    { 'rafamadriz/friendly-snippets' }
+    {
+      'L3MON4D3/LuaSnip',
+      dependencies = { "rafamadriz/friendly-snippets" },
+    },
   }
 })
 
@@ -128,24 +150,22 @@ vim.opt.smartcase = true
 -- Keep signcolumn on by default
 vim.opt.signcolumn = 'yes'
 -- Decrease update time
-vim.opt.updatetime = 250
+vim.opt.updatetime = 150
 -- view command output
 vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 20
+vim.opt.splitright = true
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-vim.keymap.set('n', '<leader>z', '<cmd>Zen<CR>')
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 vim.keymap.set('n', '<C-b>', '<cmd>wa<CR><cmd>make<CR>')
-vim.keymap.set('i', '<C-d>', '<cmd>normal "lyy"lp<CR>')
-vim.keymap.set('n', '<C-a>', 'ggvG')
-vim.keymap.set({ 'n', 'v', 'i' }, '<C-Down>', '<C-d>zz')
-vim.keymap.set({ 'n', 'v', 'i' }, '<C-Up>', '<C-u>zz')
+
+vim.keymap.set({ 'n', 'v', 'i' }, '<C-j>', '<C-d>zz')
+vim.keymap.set({ 'n', 'v', 'i' }, '<C-k>', '<C-u>zz')
 
 -- registers
-vim.keymap.set('n', '<C-m>', '"_')
+vim.keymap.set({ 'n', 'v' }, '<C-ù>', '"_')
 vim.keymap.set({ 'n', 'v' }, '<C-s>', '"+')
 
 vim.keymap.set({ 'v', 'i', 'n' }, '<S-Up>', '')
@@ -154,23 +174,25 @@ vim.keymap.set({ "n", "v" }, '<C-p>', '<cmd>ls<CR>:buffer ')
 
 --LSP
 local lsp_zero = require('lsp-zero')
-
 ---@diagnostic disable-next-line: unused-local
 local lsp_attach = function(client, bufnr)
   local opts = { buffer = bufnr }
   local fzf = require("fzf-lua")
 
   vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-  vim.keymap.set('n', 'gd', fzf.lsp_definitions, opts)
-  vim.keymap.set('n', 'gD', fzf.lsp_declarations, opts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
   vim.keymap.set('n', 'gi', fzf.lsp_implementations, opts)
   vim.keymap.set('n', 'ds', fzf.lsp_document_symbols, opts)
   vim.keymap.set('n', 'ws', fzf.lsp_workspace_symbols, opts)
-  vim.keymap.set('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
+  vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, opts)
   vim.keymap.set('n', 'gr', fzf.lsp_references, opts)
   vim.keymap.set({ "n", "i" }, '<C-h>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-  vim.keymap.set('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+  vim.keymap.set('n', '<leader>cn', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
   vim.keymap.set('n', '<leader>ca', fzf.lsp_code_actions, opts)
+
+  vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, opts)
+  vim.keymap.set('n', '<leader>e', fzf.lsp_document_diagnostics, opts)
 end
 
 lsp_zero.extend_lspconfig({
@@ -181,6 +203,7 @@ lsp_zero.extend_lspconfig({
 
 local cmp = require('cmp')
 local cmp_format = require('lsp-zero').cmp_format({ details = true })
+local ls = require('luasnip')
 
 require('luasnip.loaders.from_vscode').lazy_load()
 
@@ -200,19 +223,23 @@ cmp.setup({
   },
   snippet = {
     expand = function(args)
-      require('luasnip').lsp_expand(args.body)
+      ls.lsp_expand(args.body)
     end,
   },
 })
 
-vim.api.nvim_set_keymap('i', '<Tab>', [[luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' : '<Tab>']],
+vim.keymap.set('i', '<Tab>', [[luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' : '<Tab>']],
   { expr = true, silent = true })
-vim.api.nvim_set_keymap('s', '<Tab>', [[<cmd>lua require('luasnip').jump(1)<CR>]], { silent = true })
+vim.keymap.set('s', '<Tab>', [[<cmd>lua require('luasnip').jump(1)<CR>]], { silent = true })
 
-vim.api.nvim_set_keymap('i', '<S-Tab>', [[luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>']],
+vim.keymap.set('i', '<S-Tab>', [[luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>']],
   { expr = true, silent = true })
-vim.api.nvim_set_keymap('s', '<S-Tab>', [[<cmd>lua require('luasnip').jump(-1)<CR>]], { silent = true })
+vim.keymap.set('s', '<S-Tab>', [[<cmd>lua require('luasnip').jump(-1)<CR>]], { silent = true })
 
 require('lspconfig').lua_ls.setup({})
 require('lspconfig').clangd.setup({})
 require('lspconfig').ts_ls.setup({})
+require('lspconfig').gopls.setup({})
+require('lspconfig').html.setup({})
+require('lspconfig').cssls.setup({})
+require('lspconfig').emmet_ls.setup({})
