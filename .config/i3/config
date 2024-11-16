@@ -115,6 +115,5 @@ bar {
 }
 
 default_border pixel 1
-exec xrandr --output DisplayPort-0 --mode 1920x1080
-exec_always ~/dotfiles/.config/wallpaper.sh
-exec qbittorrent
+exec_always xrandr --output DP-1 --mode 1920x1080
+exec_always ~/.config/wallpaper.sh
