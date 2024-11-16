@@ -1,6 +1,6 @@
 set $mod Mod4
 
-font pango:Sans 0
+font pango:NotoSans 7
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
@@ -110,7 +110,6 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 bar {
-  font pango:NotoSans 7
   status_command i3status
 }
 
