@@ -1,7 +1,7 @@
 #! /bin/sh
 
-COUNT_FILE="lastWallpaper"
-W_DIR="/home/mouhamed/Pictures/Wallpapers"
+COUNT_FILE="/home/$(whoami)/.config/lastWallpaper"
+W_DIR="/home/$(whoami)/Pictures/Wallpapers"
 
 if [ ! -f $COUNT_FILE ]; then
   echo "0" > $COUNT_FILE

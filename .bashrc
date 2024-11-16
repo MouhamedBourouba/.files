@@ -41,13 +41,8 @@ export EDITOR="nvim"
 
 alias ev="$EDITOR ~/.config/nvim/init.lua"
 alias ei="$EDITOR ~/.config/i3/config"
-alias dd="cd ~/dev/projects"
 alias du="du -h"
-
-eb() {
-  $EDITOR ~/.bashrc
-  source ~/.bashrc
-}
+alias npm="pnpm"
 
 v() {
   if [[ -e Session.vim ]]; then
@@ -56,3 +51,18 @@ v() {
     nvim $@
   fi
 }
+
+cdd() {
+  cd ~/dev/projects
+  local target=$(ls | fzf)
+  cd $target
+  v
+}
+
+eb() {
+  $EDITOR ~/.bashrc
+  source ~/.bashrc
+}
+
+# PATH
+export PATH="$PATH:/home/mouhamed/dev/tools/flutter/bin"

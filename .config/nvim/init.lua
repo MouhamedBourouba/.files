@@ -228,13 +228,13 @@ cmp.setup({
   },
 })
 
-vim.keymap.set('i', '<Tab>', [[luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' : '<Tab>']],
-  { expr = true, silent = true })
-vim.keymap.set('s', '<Tab>', [[<cmd>lua require('luasnip').jump(1)<CR>]], { silent = true })
-
-vim.keymap.set('i', '<S-Tab>', [[luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>']],
-  { expr = true, silent = true })
-vim.keymap.set('s', '<S-Tab>', [[<cmd>lua require('luasnip').jump(-1)<CR>]], { silent = true })
+-- vim.keymap.set('i', '<Tab>', [[luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' : '<Tab>']],
+--   { expr = true, silent = true })
+-- vim.keymap.set('s', '<Tab>', [[<cmd>lua require('luasnip').jump(1)<CR>]], { silent = true })
+--
+-- vim.keymap.set('i', '<S-Tab>', [[luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>']],
+--   { expr = true, silent = true })
+-- vim.keymap.set('s', '<S-Tab>', [[<cmd>lua require('luasnip').jump(-1)<CR>]], { silent = true })
 
 require('lspconfig').lua_ls.setup({})
 require('lspconfig').clangd.setup({})
@@ -242,4 +242,3 @@ require('lspconfig').ts_ls.setup({})
 require('lspconfig').gopls.setup({})
 require('lspconfig').html.setup({})
 require('lspconfig').cssls.setup({})
-require('lspconfig').emmet_ls.setup({})
