@@ -53,10 +53,9 @@ v() {
 }
 
 cdd() {
-  cd ~/dev/projects
+  cd ~/Development/projects
   local target=$(ls | fzf)
   cd $target
-  v
 }
 
 eb() {
