@@ -25,7 +25,9 @@ normal.family = "IosevkaNerdFont"
 bold.family = "IosevkaNerdFont"
 italic.family = "IosevkaNerdFont"
 bold_italic.family = "IosevkaNerdFont"
-size = 3.85
+offset.x = 0
+offset.y = 0
+size = 3.5
 
 [general]
 live_config_reload = true
