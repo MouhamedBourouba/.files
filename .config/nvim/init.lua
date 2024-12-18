@@ -28,24 +28,22 @@ vim.opt.splitright = true
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 vim.g.netrw_browse_split = 4
-
-vim.schedule(function()
-  vim.opt.clipboard = "unnamedplus"
-end)
+vim.g.netrw_altv = 1
+vim.g.netrw_winsize = 25
+vim.g.netrw_keepdir = 0
+vim.g.netrw_localcopydircmd = "cp -r"
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-vim.keymap.set("n", "<C-b>", "<cmd>wa<CR><cmd>make<CR>")
 
-vim.keymap.set("n", "<CR>", "<cmd>wa<CR>")
+vim.keymap.set("n", "<leader>m", "<cmd>wa<CR><cmd>make<CR>")
+vim.keymap.set("n", "<leader>c", ":set makeprg=")
 
-vim.keymap.set("n", "<C-e>", ":Vexplore<CR>:vertical resize 70<CR>")
-
-vim.keymap.set({ "n", "v", "i" }, "<C-j>", "<C-d>zz")
-vim.keymap.set({ "n", "v", "i" }, "<C-k>", "<C-u>zz")
+vim.keymap.set("n", "<leader><leader>", "<cmd>wa<CR>")
+vim.keymap.set("n", "<C-^>", "<cmd>b#<CR>")
 
 -- registers
-vim.keymap.set({ "n", "v" }, "<C-ù>", '"_')
-vim.keymap.set({ "n", "v" }, "<C-s>", '"+')
+vim.keymap.set({ "n", "v" }, "<leader>p", '"+p')
+vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
 
 vim.keymap.set({ "v", "i", "n" }, "<S-Up>", "")
 vim.keymap.set({ "v", "i", "n" }, "<S-Down>", "")
@@ -81,7 +79,8 @@ require("lazy").setup({
     config = function()
       require("telescope").setup({})
       local builtin = require("telescope.builtin")
-      vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
+      vim.keymap.set("n", "<leader>ff", builtin.git_files, { desc = "Telescope find files" })
+      vim.keymap.set("n", "<leader>fgf", builtin.fd, { desc = "Telescope find files" })
       vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
       vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "Telescope buffers" })
     end,
@@ -154,7 +153,7 @@ require("lazy").setup({
           local opts = { buffer = bufnr }
           local builtin = require("telescope.builtin")
 
-          vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+          vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
           vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
           vim.keymap.set("n", "gi", builtin.lsp_implementations, opts)
@@ -162,8 +161,8 @@ require("lazy").setup({
           vim.keymap.set("n", "<leader>ws", builtin.lsp_workspace_symbols, opts)
           vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
           vim.keymap.set("n", "gr", builtin.lsp_references, opts)
-          vim.keymap.set({ "n", "i" }, "<C-h>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-          vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+          vim.keymap.set({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, opts)
+          vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
           vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 
           vim.keymap.set("n", "<leader>q", builtin.quickfix, opts)
