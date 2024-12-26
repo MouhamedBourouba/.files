@@ -1,5 +1,4 @@
 ---@diagnostic disable: undefined-global
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.opt.expandtab = true
@@ -27,30 +26,34 @@ vim.opt.splitright = true
 
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
-vim.g.netrw_browse_split = 4
-vim.g.netrw_altv = 1
-vim.g.netrw_winsize = 25
-vim.g.netrw_keepdir = 0
-vim.g.netrw_localcopydircmd = "cp -r"
+
+-- run shell command and put it in quick fix list
+vim.api.nvim_create_user_command("Rcmd", function(args)
+  vim.api.nvim_command('cexpr system("' .. args.args .. '")')
+end, { nargs = 1 })
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
-vim.keymap.set("n", "<leader>m", "<cmd>wa<CR><cmd>make<CR>")
-vim.keymap.set("n", "<leader>c", ":set makeprg=")
+vim.keymap.set("n", "<C-r>", "<cmd>wa<CR><cmd>make<CR>")
+vim.keymap.set("n", "<C-x>", ":Rcmd ")
 
-vim.keymap.set("n", "<leader><leader>", "<cmd>wa<CR>")
-vim.keymap.set("n", "<C-^>", "<cmd>b#<CR>")
+vim.keymap.set("n", "<leader>mm", ":compiler gcc<CR>:set makeprg=make")
+vim.keymap.set("n", "<leader>mg", ":compiler go<CR>:set makeprg=go\\ run ")
+vim.keymap.set("n", "<leader>mj", "set makeprg=npm\\ run\\ dev")
 
--- registers
-vim.keymap.set({ "n", "v" }, "<leader>p", '"+p')
-vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
+vim.keymap.set("n", "<leader>q", "<cmd>copen<CR>")
+vim.keymap.set("n", "[", "<cmd>cnext")
+vim.keymap.set("n", "]", "<cmd>cNext")
+
+vim.keymap.set({ "n", "v", "x" }, "<leader>p", '"+p')
+vim.keymap.set({ "n", "v", "x" }, "<leader>y", '"+y')
+vim.keymap.set({ "n", "v", "x" }, "<leader>d", '"_d')
 
 vim.keymap.set({ "v", "i", "n" }, "<S-Up>", "")
 vim.keymap.set({ "v", "i", "n" }, "<S-Down>", "")
-vim.keymap.set({ "n", "v" }, "<C-p>", "<cmd>ls<CR>:buffer ")
 
--- neovide
-vim.opt.guifont = { "Iosevka Nerd Font", ":h3.85" }
+vim.keymap.set("n", "<C-p>", "<cmd>ls<CR>:buffer ")
+vim.keymap.set("n", "<C-^>", "<cmd>b#<CR>")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -165,7 +168,6 @@ require("lazy").setup({
           vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
           vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 
-          vim.keymap.set("n", "<leader>q", builtin.quickfix, opts)
           vim.keymap.set("n", "<leader>e", builtin.diagnostics, opts)
         end
 
