@@ -83,7 +83,7 @@ require("lazy").setup({
       require("telescope").setup({})
       local builtin = require("telescope.builtin")
       vim.keymap.set("n", "<leader>ff", builtin.git_files, { desc = "Telescope find files" })
-      vim.keymap.set("n", "<leader>fgf", builtin.fd, { desc = "Telescope find files" })
+      vim.keymap.set("n", "<leader>gf", builtin.fd, { desc = "Telescope find files" })
       vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
       vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "Telescope buffers" })
     end,
@@ -147,7 +147,6 @@ require("lazy").setup({
             })
           end,
         },
-        vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format),
       },
       config = function()
         local lsp_zero = require("lsp-zero")
@@ -167,6 +166,7 @@ require("lazy").setup({
           vim.keymap.set({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, opts)
           vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
           vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+          vim.keymap.set("n", "<leader>F", vim.lsp.buf.format)
 
           vim.keymap.set("n", "<leader>e", builtin.diagnostics, opts)
         end
