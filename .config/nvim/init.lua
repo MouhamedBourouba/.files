@@ -52,6 +52,9 @@ vim.keymap.set({ "n", "v", "x" }, "<leader>d", '"_d')
 vim.keymap.set({ "v", "i", "n" }, "<S-Up>", "")
 vim.keymap.set({ "v", "i", "n" }, "<S-Down>", "")
 
+vim.keymap.set({ "v", "i", "n" }, "<c-d>", "<c-d>zz")
+vim.keymap.set({ "v", "i", "n" }, "<c-u>", "<c-u>zz")
+
 vim.keymap.set("n", "<C-p>", "<cmd>ls<CR>:buffer ")
 vim.keymap.set("n", "<C-^>", "<cmd>b#<CR>")
 
