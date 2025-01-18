@@ -64,5 +64,5 @@ eb() {
 }
 
 # PATH
-export PATH="$PATH:/home/mouhamed/dev/tools/flutter/bin"
+export PATH="$PATH:/home/mouhamed/Development/third-party/flutter/bin"
 export MANPAGER="nvim +Man!"

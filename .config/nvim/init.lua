@@ -37,6 +37,8 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<C-r>", "<cmd>wa<CR><cmd>make<CR>")
 vim.keymap.set("n", "<C-x>", ":Rcmd ")
 
+vim.keymap.set("n", "<C-t>", "gT")
+
 vim.keymap.set("n", "<leader>mm", ":compiler gcc<CR>:set makeprg=make")
 vim.keymap.set("n", "<leader>mg", ":compiler go<CR>:set makeprg=go\\ run ")
 vim.keymap.set("n", "<leader>mj", "set makeprg=npm\\ run\\ dev")
@@ -81,7 +83,10 @@ require("lazy").setup({
   {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.8",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-ui-select.nvim"
+    },
     config = function()
       require("telescope").setup({})
       local builtin = require("telescope.builtin")
@@ -89,6 +94,7 @@ require("lazy").setup({
       vim.keymap.set("n", "<leader>gf", builtin.fd, { desc = "Telescope find files" })
       vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
       vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "Telescope buffers" })
+      require("telescope").load_extension("ui-select")
     end,
   },
   {
@@ -182,6 +188,7 @@ require("lazy").setup({
 
         local cmp = require("cmp")
         local ls = require("luasnip")
+        local luasnip = require("luasnip")
 
         require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -193,6 +200,13 @@ require("lazy").setup({
           mapping = cmp.mapping.preset.insert({
             ["<C-Space>"] = cmp.mapping.complete(),
             ["<CR>"] = cmp.mapping.confirm({ select = true }),
+            ["<TAB>"] = function(fallback)
+              if luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+              else
+                fallback()
+              end
+            end,
           }),
           window = {
             completion = cmp.config.window.bordered(),
@@ -213,6 +227,7 @@ require("lazy").setup({
         require("lspconfig").cssls.setup({})
         require("lspconfig").jsonls.setup({})
         require("lspconfig").ts_ls.setup({})
+        require("lspconfig").dartls.setup({})
       end,
     },
     { "neovim/nvim-lspconfig" },
