@@ -21,6 +21,7 @@ return {
       highlight = {
         enable = true,
       },
+      auto_install = true,
     })
   end,
 }

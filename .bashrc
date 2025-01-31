@@ -43,6 +43,7 @@ alias ev="$EDITOR ~/.config/nvim/init.lua"
 alias ei="$EDITOR ~/.config/i3/config"
 alias du="du -h"
 alias npm="pnpm"
+alias npx="pnpx"
 
 v() {
   if [[ -e Session.vim ]]; then
