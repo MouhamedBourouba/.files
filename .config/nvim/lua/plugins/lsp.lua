@@ -8,7 +8,10 @@ return {
       { "hrsh7th/nvim-cmp" },
       {
         "L3MON4D3/LuaSnip",
-        dependencies = { "rafamadriz/friendly-snippets" },
+        dependencies = {
+          "rafamadriz/friendly-snippets",
+          "saadparwaiz1/cmp_luasnip",
+        },
         config = function()
           require("luasnip.loaders.from_vscode").lazy_load() -- Load friendly-snippets
         end,
@@ -69,10 +72,6 @@ return {
             luasnip.lsp_expand(args.body)
           end,
         },
-        sources = {
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-        },
         mapping = cmp.mapping.preset.insert({
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
@@ -83,15 +82,26 @@ return {
               fallback()
             end
           end,
+          ["<S-Tab>"] = function(fallback)
+            if luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end,
         }),
         window = {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
-      })
 
-      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+        sources = cmp.config.sources({
+          { name = "nvim_lsp" },
+          { name = "luasnip" }, -- For luasnip users.
+        }, {
+          { name = "buffer" },
+        }),
+      })
 
       -- Setup LSP servers
       local servers = {
@@ -102,7 +112,7 @@ return {
         "html",
         "cssls",
         "jsonls",
-        "ts_ls",
+        "tsserver",
         "dartls",
       }
       for _, server in ipairs(servers) do
