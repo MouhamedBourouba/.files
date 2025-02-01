@@ -67,6 +67,8 @@ eb() {
   source ~/.bashrc
 }
 
+export MANPAGER="nvim +Man!"
+
 # PATH
 export PATH="$PATH:/home/mouhamed/Development/third-party/flutter/bin"
-export MANPAGER="nvim +Man!"
+export PATH="$PATH:/home/mouhamed/go/bin"

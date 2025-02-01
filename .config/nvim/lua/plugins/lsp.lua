@@ -14,6 +14,16 @@ return {
         },
         config = function()
           require("luasnip.loaders.from_vscode").lazy_load() -- Load friendly-snippets
+
+          local ls = require("luasnip")
+          local s = ls.snippet
+          local t = ls.text_node
+
+          ls.add_snippets("javascript", {
+            s("jd", {
+              t({ "/**", " * ", " */" }),
+            }),
+          })
         end,
       },
       {
@@ -66,6 +76,7 @@ return {
       -- Setup nvim-cmp with LuaSnip
       local cmp = require("cmp")
       local luasnip = require("luasnip")
+
       cmp.setup({
         snippet = {
           expand = function(args)
@@ -94,7 +105,6 @@ return {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
-
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "luasnip" }, -- For luasnip users.
@@ -102,6 +112,9 @@ return {
           { name = "buffer" },
         }),
       })
+
+      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
       -- Setup LSP servers
       local servers = {
