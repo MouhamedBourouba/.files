@@ -45,6 +45,9 @@ alias du="du -h"
 alias npm="pnpm"
 alias npx="pnpx"
 
+alias cd="z"
+source <(zoxide init bash)
+
 v() {
   if [[ -e Session.vim ]]; then
     nvim -S Session.vim $@
