@@ -112,7 +112,7 @@ return {
         "html",
         "cssls",
         "jsonls",
-        "tsserver",
+        "ts_ls",
         "dartls",
       }
       for _, server in ipairs(servers) do
