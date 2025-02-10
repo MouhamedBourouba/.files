@@ -20,6 +20,13 @@ return {
           local t = ls.text_node
           local i = ls.insert_node
 
+          ls.add_snippets("javascriptreact", {
+            s("jd", {
+              t({ "/**", " * " }),
+              i(1),
+              t({ "", " */" }),
+            }),
+          })
           ls.add_snippets("javascript", {
             s("jd", {
               t({ "/**", " * " }),

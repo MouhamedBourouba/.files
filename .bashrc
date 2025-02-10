@@ -72,3 +72,5 @@ export MANPAGER="nvim +Man!"
 # PATH
 export PATH="$PATH:/home/mouhamed/Development/third-party/flutter/bin"
 export PATH="$PATH:/home/mouhamed/go/bin"
+export PATH="$PATH:/home/mouhamed/Android/Sdk/platform-tools"
+export PATH="$PATH:/home/mouhamed/Android/Sdk/emulator"
