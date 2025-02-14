@@ -35,8 +35,8 @@ end, { nargs = 1 })
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
-vim.keymap.set("n", "<C-r>", "<cmd>wa<CR><cmd>make<CR>")
-vim.keymap.set("n", "<C-x>", ":Rcmd ")
+vim.keymap.set("n", "<leader>;", "<cmd>wa<CR><cmd>make<CR>")
+vim.keymap.set("n", "<leader>r", ":Rcmd ")
 
 vim.keymap.set("n", "<C-t>", "gT")
 vim.keymap.set("n", "^", "<C-^>")
