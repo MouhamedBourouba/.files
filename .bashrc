@@ -27,8 +27,19 @@ shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
+  . /etc/bash_completion
 fi
+
+# pnpm
+export PNPM_HOME="/home/mouhamed/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# flutter completions
+source <(flutter bash-completion)
 
 alias rm="rm -i"
 alias mv="mv -i"
@@ -74,3 +85,4 @@ export PATH="$PATH:/home/mouhamed/Development/third-party/flutter/bin"
 export PATH="$PATH:/home/mouhamed/go/bin"
 export PATH="$PATH:/home/mouhamed/Android/Sdk/platform-tools"
 export PATH="$PATH:/home/mouhamed/Android/Sdk/emulator"
+
