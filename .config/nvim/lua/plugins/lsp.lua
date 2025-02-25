@@ -137,7 +137,7 @@ return {
         "jsonls",
         "ts_ls",
         "dartls",
-        "astro",
+        "astro"
       }
       for _, server in ipairs(servers) do
         require("lspconfig")[server].setup({})
