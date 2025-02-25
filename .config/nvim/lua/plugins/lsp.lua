@@ -69,7 +69,7 @@ return {
         map("n", "<leader>ws", builtin.lsp_workspace_symbols, opts)
         map("n", "gt", vim.lsp.buf.type_definition, opts)
         map("n", "gr", builtin.lsp_references, opts)
-        map({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, opts)
+        map("i", "<C-k>", vim.lsp.buf.signature_help, opts)
         map("n", "<leader>rn", vim.lsp.buf.rename, opts)
         map("n", "<leader>ca", vim.lsp.buf.code_action, opts)
         map("n", "<leader>F", vim.lsp.buf.format)
@@ -136,8 +136,7 @@ return {
         "cssls",
         "jsonls",
         "ts_ls",
-        "dartls",
-        "astro"
+        "astro",
       }
       for _, server in ipairs(servers) do
         require("lspconfig")[server].setup({})
