@@ -38,9 +38,6 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-# flutter completions
-source <(flutter bash-completion)
-
 alias rm="rm -i"
 alias mv="mv -i"
 alias cp="cp -i"
@@ -78,11 +75,20 @@ eb() {
   source ~/.bashrc
 }
 
+flutter-watch() {
+  flutter run --pid-file ./flutter.pid
+  while true 
+  do
+    find ./lib -name *.dart | entr -d -p kill -USR1 $(cat ./flutter.pid)
+  done
+}
+
 export MANPAGER="nvim +Man!"
 
 # PATH
-export PATH="$PATH:/home/mouhamed/Development/third-party/flutter/bin"
 export PATH="$PATH:/home/mouhamed/go/bin"
 export PATH="$PATH:/home/mouhamed/Android/Sdk/platform-tools"
 export PATH="$PATH:/home/mouhamed/Android/Sdk/emulator"
 
+# flutter completions
+source <(flutter bash-completion)
