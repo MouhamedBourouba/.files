@@ -136,6 +136,7 @@ return {
         "cssls",
         "jsonls",
         "ts_ls",
+        "bashls",
         "astro",
       }
       for _, server in ipairs(servers) do
