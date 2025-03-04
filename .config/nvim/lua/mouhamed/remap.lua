@@ -28,7 +28,7 @@ vim.keymap.set({ "n", "v", "x" }, "<leader>d", '"_d')
 
 vim.keymap.set({ "v", "i", "n" }, "<S-Up>", "")
 vim.keymap.set({ "v", "i", "n" }, "<S-Down>", "")
-vim.keymap.set({ "v", "i", "n" }, "L", "")
+vim.keymap.set({ "v", "n" }, "L", "")
 
 vim.keymap.set({ "v", "i", "n" }, "<c-d>", "<c-d>zz")
 vim.keymap.set({ "v", "i", "n" }, "<c-u>", "<c-u>zz")
