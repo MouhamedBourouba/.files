@@ -62,3 +62,5 @@ yay
 yay-debug
 zoxide
 base-devel
+xdotool
+bash-language-server
