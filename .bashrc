@@ -75,12 +75,13 @@ eb() {
   source ~/.bashrc
 }
 
-flutter-watch() {
-  flutter run --pid-file ./flutter.pid
-  while true 
-  do
-    find ./lib -name *.dart | entr -d -p kill -USR1 $(cat ./flutter.pid)
-  done
+flutter_watch() {
+  tmux \
+    send-keys "flutter run $1 $2 $3 $4 --pid-file=/tmp/fp.pid" Enter \; \
+    split-window -v \; \
+    send-keys 'while true; do find ./lib -name *.dart | entr -cpsd "cat /tmp/fp.pid | xargs -Ixx kill -USR1 xx" ; done' Enter \; \
+    resize-pane -y 5 \; \
+    select-pane -t 0 \;
 }
 
 export MANPAGER="nvim +Man!"

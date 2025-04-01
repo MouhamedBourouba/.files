@@ -7,9 +7,7 @@ vim.api.nvim_create_user_command("Rcmd", function(args)
 end, { nargs = 1 })
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-
 vim.keymap.set("n", "<leader>;", "<cmd>wa<CR><cmd>make<CR>")
-vim.keymap.set("n", "<leader>r", ":Rcmd ")
 
 vim.keymap.set("n", "<C-t>", "gT")
 vim.keymap.set("n", "^", "<C-^>")
@@ -19,8 +17,8 @@ vim.keymap.set("n", "<leader>mg", ":compiler go<CR>:set makeprg=go\\ run ")
 vim.keymap.set("n", "<leader>mj", "set makeprg=npm\\ run\\ dev")
 
 vim.keymap.set("n", "<leader>q", "<cmd>copen<CR>")
-vim.keymap.set("n", "[", "<cmd>cnext")
-vim.keymap.set("n", "]", "<cmd>cNext")
+vim.keymap.set("n", "[[", "<cmd>cnext<CR>")
+vim.keymap.set("n", "]]", "<cmd>cNext<CR>")
 
 vim.keymap.set({ "n", "v", "x" }, "<leader>p", '"+p')
 vim.keymap.set({ "n", "v", "x" }, "<leader>y", '"+y')
