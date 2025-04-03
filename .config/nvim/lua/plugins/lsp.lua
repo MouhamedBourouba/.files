@@ -14,26 +14,6 @@ return {
         },
         config = function()
           require("luasnip.loaders.from_vscode").lazy_load() -- Load friendly-snippets
-
-          local ls = require("luasnip")
-          local s = ls.snippet
-          local t = ls.text_node
-          local i = ls.insert_node
-
-          ls.add_snippets("javascriptreact", {
-            s("jd", {
-              t({ "/**", " * " }),
-              i(1),
-              t({ "", " */" }),
-            }),
-          })
-          ls.add_snippets("javascript", {
-            s("jd", {
-              t({ "/**", " * " }),
-              i(1),
-              t({ "", " */" }),
-            }),
-          })
         end,
       },
       {
