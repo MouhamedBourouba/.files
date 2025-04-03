@@ -116,7 +116,6 @@ return {
         "cssls",
         "jsonls",
         "ts_ls",
-        "ts_ls",
         "astro",
         "dartls"
       }
