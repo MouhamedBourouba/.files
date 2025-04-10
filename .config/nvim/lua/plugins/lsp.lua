@@ -52,8 +52,10 @@ return {
         map("i", "<C-k>", vim.lsp.buf.signature_help, opts)
         map("n", "<leader>rn", vim.lsp.buf.rename, opts)
         map("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-        map("n", "<leader>F", vim.lsp.buf.format)
         map("n", "<leader>e", builtin.diagnostics, opts)
+        map("n", "<leader>F", function()
+          vim.lsp.buf.format({ timeout_ms = 2000 })
+        end)
       end
 
       -- Extend LSP config
@@ -117,7 +119,7 @@ return {
         "jsonls",
         "ts_ls",
         "astro",
-        "dartls"
+        "dartls",
       }
       for _, server in ipairs(servers) do
         require("lspconfig")[server].setup({})

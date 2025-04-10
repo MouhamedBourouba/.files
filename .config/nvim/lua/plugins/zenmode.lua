@@ -5,7 +5,7 @@ return {
     vim.keymap.set("n", "<leader>j", function()
       require("zen-mode").toggle({
         window = {
-          width = 0.65,
+          width = 0.70,
         },
       })
     end)

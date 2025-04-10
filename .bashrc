@@ -45,6 +45,8 @@ alias cp="cp -i"
 alias ls="exa --color=auto"
 alias la="exa -alh"
 
+alias v="nvim"
+
 export EDITOR="nvim"
 
 alias ev="$EDITOR ~/.config/nvim/init.lua"
@@ -55,15 +57,6 @@ alias npx="pnpx"
 
 alias cd="z"
 source <(zoxide init bash)
-
-v() {
-  nvim
-  # if [[ -e Session.vim ]]; then
-  #   nvim -S Session.vim $@
-  # else
-  #   nvim $@
-  # fi
-}
 
 cdd() {
   cd ~/Development/projects
