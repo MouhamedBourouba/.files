@@ -116,6 +116,7 @@ return {
         "gopls",
         "html",
         "cssls",
+        "bashls",
         "jsonls",
         "ts_ls",
         "astro",
