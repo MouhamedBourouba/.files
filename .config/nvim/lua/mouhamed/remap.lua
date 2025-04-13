@@ -5,6 +5,9 @@ vim.g.maplocalleader = "\\"
 vim.api.nvim_create_user_command("Rcmd", function(args)
   vim.api.nvim_command('cexpr system("' .. args.args .. '")')
 end, { nargs = 1 })
+vim.api.nvim_create_user_command("W", function()
+  vim.api.nvim_command('wa')
+end, { nargs = 0 })
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<leader>;", "<cmd>wa<CR><cmd>make<CR>")
