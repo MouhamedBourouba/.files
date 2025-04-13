@@ -118,6 +118,9 @@ exec_always --no-startup-id sh -c "sleep 1 && xmodmap ~/.Xmodmap"
 # bar
 bar {
   status_command i3status
+  # disable scroll in bar
+    bindsym button4 nop
+    bindsym button5 nop
 }
 
 default_border pixel 2
