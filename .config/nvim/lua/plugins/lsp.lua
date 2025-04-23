@@ -112,7 +112,6 @@ return {
       local servers = {
         "tailwindcss",
         "lua_ls",
-        "clangd",
         "gopls",
         "html",
         "cssls",
@@ -125,6 +124,9 @@ return {
       for _, server in ipairs(servers) do
         require("lspconfig")[server].setup({})
       end
+      require("lspconfig").clangd.setup({
+        filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
+      })
     end,
   },
 }
