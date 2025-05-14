@@ -7,7 +7,6 @@ return {
       })
       vim.cmd("colorscheme kanagawa")
     end,
-    lazy = false
   },
   {
     "catppuccin/nvim",

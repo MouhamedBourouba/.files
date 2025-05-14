@@ -1,6 +1,3 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
 -- run shell command and put it in quick fix list
 vim.api.nvim_create_user_command("Rcmd", function(args)
   vim.api.nvim_command('cexpr system("' .. args.args .. '")')

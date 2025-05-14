@@ -16,21 +16,21 @@ return {
           require("luasnip.loaders.from_vscode").lazy_load() -- Load friendly-snippets
         end,
       },
-      {
-        "nvimtools/none-ls.nvim",
-        config = function()
-          local null_ls = require("null-ls")
-          null_ls.setup({
-            sources = {
-              null_ls.builtins.formatting.clang_format,
-              null_ls.builtins.formatting.stylua,
-              null_ls.builtins.formatting.gofmt,
-              null_ls.builtins.formatting.prettier,
-              null_ls.builtins.formatting.sqlfluff,
-            },
-          })
-        end,
-      },
+      -- {
+      --   "nvimtools/none-ls.nvim",
+      --   config = function()
+      --     local null_ls = require("null-ls")
+      --     null_ls.setup({
+      --       sources = {
+      --         null_ls.builtins.formatting.clang_format,
+      --         null_ls.builtins.formatting.stylua,
+      --         null_ls.builtins.formatting.gofmt,
+      --         null_ls.builtins.formatting.prettier,
+      --         null_ls.builtins.formatting.sqlfluff,
+      --       },
+      --     })
+      --   end,
+      -- },
     },
     config = function()
       local lsp_zero = require("lsp-zero")
@@ -45,7 +45,7 @@ return {
         map("n", "gd", vim.lsp.buf.definition, opts)
         map("n", "gD", vim.lsp.buf.declaration, opts)
         map("n", "gi", builtin.lsp_implementations, opts)
-        map("n", "ds", builtin.lsp_document_symbols, opts)
+        map("n", "<leader>ds", builtin.lsp_document_symbols, opts)
         map("n", "<leader>ws", builtin.lsp_workspace_symbols, opts)
         map("n", "gt", vim.lsp.buf.type_definition, opts)
         map("n", "gr", builtin.lsp_references, opts)

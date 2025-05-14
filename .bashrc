@@ -114,3 +114,4 @@ export PATH="$PATH:/home/mouhamed/Android/Sdk/emulator"
 
 # flutter completions
 source <(flutter bash-completion)
+source <(fzf --bash)
