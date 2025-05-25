@@ -42,8 +42,8 @@ alias rm="rm -i"
 alias mv="mv -i"
 alias cp="cp -i"
 
-alias ls="exa --color=auto"
-alias la="exa -alh"
+alias ls="eza --color=auto"
+alias la="eza -alh"
 
 alias v="nvim"
 
