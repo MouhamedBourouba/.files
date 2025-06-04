@@ -54,6 +54,7 @@ alias ei="$EDITOR ~/.config/i3/config"
 alias du="du -h"
 alias npm="pnpm"
 alias npx="pnpx"
+alias tldr="tlgr"
 
 alias cd="z"
 source <(zoxide init bash)
