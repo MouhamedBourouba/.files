@@ -16,21 +16,22 @@ return {
           require("luasnip.loaders.from_vscode").lazy_load() -- Load friendly-snippets
         end,
       },
-      -- {
-      --   "nvimtools/none-ls.nvim",
-      --   config = function()
-      --     local null_ls = require("null-ls")
-      --     null_ls.setup({
-      --       sources = {
-      --         null_ls.builtins.formatting.clang_format,
-      --         null_ls.builtins.formatting.stylua,
-      --         null_ls.builtins.formatting.gofmt,
-      --         null_ls.builtins.formatting.prettier,
-      --         null_ls.builtins.formatting.sqlfluff,
-      --       },
-      --     })
-      --   end,
-      -- },
+      {
+        "nvimtools/none-ls.nvim",
+        config = function()
+          local null_ls = require("null-ls")
+          null_ls.setup({
+            sources = {
+              null_ls.builtins.formatting.clang_format,
+              null_ls.builtins.formatting.stylua,
+              null_ls.builtins.formatting.gofmt,
+              null_ls.builtins.formatting.prettier,
+              null_ls.builtins.formatting.sqlfluff,
+              null_ls.builtins.diagnostics.golangci_lint,
+            },
+          })
+        end,
+      },
     },
     config = function()
       local lsp_zero = require("lsp-zero")
@@ -125,7 +126,7 @@ return {
         require("lspconfig")[server].setup({})
       end
       require("lspconfig").clangd.setup({
-        filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
+        filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
       })
     end,
   },
