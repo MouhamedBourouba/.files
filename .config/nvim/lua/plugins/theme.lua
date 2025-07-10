@@ -17,25 +17,26 @@
 --   },
 -- }
 return {
-  {
-    -- "projekt0n/github-nvim-theme",
-    -- name = "github-theme",
-    -- config = function()
-    --   vim.cmd("colorscheme github_dark_default")
-    -- end,
-  },
+	{
+		-- "projekt0n/github-nvim-theme",
+		-- name = "github-theme",
+		-- config = function()
+		--   vim.cmd("colorscheme github_dark_default")
+		-- end,
+	},
 
-  -- lua/plugins/rose-pine.lua
-  {
-    "rose-pine/neovim",
-    name = "rose-pine",
-    config = function()
-      vim.cmd("colorscheme rose-pine-moon")
-    end
-  },
+	-- lua/plugins/rose-pine.lua
+	{
+		"rose-pine/neovim",
+		name = "rose-pine",
+		config = function()
+			vim.cmd("colorscheme rose-pine-moon")
+		end,
+		lazy = false,
+	},
 
-  {
-    "echasnovski/mini.statusline",
-    opts = {},
-  },
+	{
+		"echasnovski/mini.statusline",
+		opts = {},
+	},
 }
