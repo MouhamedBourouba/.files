@@ -25,4 +25,3 @@ vim.g.netrw_banner = 0
 
 vim.opt.scrolloff = 20
 
-vim.cmd("colorscheme kanagawa")
