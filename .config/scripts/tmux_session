@@ -1,0 +1,21 @@
+#!/bin/bash
+
+local selected
+selected=$(find ~/Development/projects/ -maxdepth 1 -mindepth 1 -type d | fzf) || return
+
+local selected_name
+selected_name=$(basename "$selected" | tr . _)
+
+local tmux_running
+tmux_running=$(pgrep tmux)
+
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+  tmux new-session -s "$selected_name" -c "$selected"
+  return
+fi
+
+if ! tmux has-session -t="$selected_name" 2>/dev/null; then
+  tmux new-session -ds "$selected_name" -c "$selected"
+fi
+
+[[ -z $TMUX ]] && tmux attach -t "$selected_name" || tmux switch-client -t "$selected_name"

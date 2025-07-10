@@ -111,7 +111,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 exec_always xrandr --output DP-1 --mode 1920x1080
-exec_always ~/.config/wallpaper.sh
+exec_always wallpaper
 exec_always setxkbmap -layout us,ara -option grp:alt_shift_toggle
 exec_always --no-startup-id sh -c "sleep 1 && xmodmap ~/.Xmodmap"
 

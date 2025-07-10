@@ -1,0 +1,8 @@
+#!/bin/bash
+
+tmux \
+  send-keys "flutter run $* --pid-file=/tmp/fp.pid" Enter \; \
+  split-window -v \; \
+  send-keys 'while true; do find ./lib -name "*.dart" | entr -cpsd "cat /tmp/fp.pid | xargs -Ixx kill -USR1 xx"; done' Enter \; \
+  resize-pane -y 5 \; \
+  select-pane -t 0 \;
