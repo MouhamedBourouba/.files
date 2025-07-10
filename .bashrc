@@ -60,5 +60,5 @@ parse_git_branch() {
 }
 PS1="${CYAN}\u@\h ${YELLOW}\w${GREEN}\$(parse_git_branch)${RESET}\$ "
 
-# command -v flutter &>/dev/null && source <(flutter bash-completion)
+# fzf shell integrations
 command -v fzf &>/dev/null && source <(fzf --bash)
