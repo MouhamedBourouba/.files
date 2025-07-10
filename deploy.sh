@@ -1,28 +1,42 @@
 ALL_PACKAGES=(
+  # login manager
+  ly
+
+  # window manager
+  i3-wm
+  i3status
+  alacritty
+
+  # base develepment tools
+  git
+  base-devel
+  
+  # compilers
   gcc
   clang
+  go
+  nodejs
+
+  # code editors
+  code
+  neovim
+
+  # build tools 
   make
   cmake
-  git
-  nodejs
-  pnpm
-  go
-  base-devel
-  i3-wm
-  thorium-browser-bin
-  alacritty
-  i3lock
-  i3status
-  rofi
+
+  # gui tools
   lxappearance
-  ly
-  xcolor
-  feh
+  rofi
   flameshot
   pavucontrol
   telegram-desktop
   nemo
+
+  # cli tools
   tmux
+  xcolor
+  feh
   zoxide
   stow
   fastfetch
@@ -30,13 +44,21 @@ ALL_PACKAGES=(
   gdu
   fzf
   tokei
-  tealdeer
   unzip
   unrar
   entr
   btop
-  mitmproxy
   wget
+  
+  # formmaters
+  gopls
+  prettier
+  stylua
+  
+  # package managers
+  pnpm
+  
+  # langage servers
   bash-language-server
   lua-language-server
   tailwindcss-language-server
@@ -44,11 +66,6 @@ ALL_PACKAGES=(
   vscode-css-languageserver
   vscode-html-languageserver
   vscode-json-languageserver
-  gopls
-  prettier
-  stylua
-  code
-  neovim
 )
 
 print_logo() {
