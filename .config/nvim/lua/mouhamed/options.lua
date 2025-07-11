@@ -51,8 +51,8 @@ vim.opt.encoding = "UTF-8"                        -- Set encoding
 vim.opt.foldmethod = "expr"                       -- Use expression for folding
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"   -- Use treesitter for folding
 vim.opt.foldlevel = 99                            -- Start with all folds open
-vim.opt.splitbelow = true                         -- Horizontal splits go below
 vim.opt.splitright = true                         -- Vertical splits go right
 vim.opt.clipboard:append("unnamedplus")           -- Use system clipboard
 
 -- vim.opt.colorcolumn = "100"                       -- Show column at 100 characters
+-- vim.opt.splitbelow = true                         -- Horizontal splits go below
