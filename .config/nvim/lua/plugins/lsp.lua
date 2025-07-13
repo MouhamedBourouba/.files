@@ -1,126 +1,120 @@
 return {
-	{
-		"neovim/nvim-lspconfig",
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/nvim-cmp",
-			{
-				"L3MON4D3/LuaSnip",
-				dependencies = {
-					"rafamadriz/friendly-snippets",
-					"saadparwaiz1/cmp_luasnip",
-				},
-				config = function()
-					require("luasnip.loaders.from_vscode").lazy_load()
-				end,
-			},
-		},
-		config = function()
-			-- Keymaps for LSP
-			local on_attach = function(_, bufnr)
-				local opts = { buffer = bufnr }
-				local map = vim.keymap.set
-				local builtin = require("telescope.builtin")
+  {
+    "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      local lspconfig = require("lspconfig")
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-				map("n", "K", vim.lsp.buf.hover, opts)
+      local on_attach = function(_, bufnr)
+        local map = vim.keymap.set
+        local opts = { buffer = bufnr }
+        local builtin = require("telescope.builtin")
 
-				map("n", "gd", vim.lsp.buf.definition, opts)
-				map("n", "gr", builtin.lsp_references, opts)
-				map("n", "gD", vim.lsp.buf.declaration, opts)
-				map("n", "gi", builtin.lsp_implementations, opts)
-				map("n", "gt", vim.lsp.buf.type_definition, opts)
+        local keys = {
+          ["K"] = vim.lsp.buf.hover,
+          ["gd"] = vim.lsp.buf.definition,
+          ["gr"] = builtin.lsp_references,
+          ["gD"] = vim.lsp.buf.declaration,
+          ["gi"] = builtin.lsp_implementations,
+          ["gt"] = vim.lsp.buf.type_definition,
+          ["<leader>ds"] = builtin.lsp_document_symbols,
+          ["<leader>ws"] = builtin.lsp_workspace_symbols,
+          ["<leader>rn"] = vim.lsp.buf.rename,
+          ["<leader>ca"] = vim.lsp.buf.code_action,
+          ["<leader>e"] = builtin.diagnostics,
+          ["<C-k>"] = { vim.lsp.buf.signature_help, mode = "i" },
+        }
 
-				map("n", "<leader>ds", builtin.lsp_document_symbols, opts)
-				map("n", "<leader>ws", builtin.lsp_workspace_symbols, opts)
-				map("i", "<C-k>", vim.lsp.buf.signature_help, opts)
-				map("n", "<leader>rn", vim.lsp.buf.rename, opts)
-				map("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-				map("n", "<leader>e", builtin.diagnostics, opts)
-			end
+        for lhs, rhs in pairs(keys) do
+          local fn, mode = rhs, "n"
+          if type(rhs) == "table" then fn, mode = rhs[1], rhs.mode end
+          map(mode, lhs, fn, opts)
+        end
+      end
 
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local servers = {
+        lua_ls = {},
+        gopls = {},
+        html = {},
+        cssls = {},
+        bashls = {},
+        jsonls = {},
+        ts_ls = {},
+        astro = {},
+        dartls = {},
+        svelte = {},
+        tailwindcss = {},
+        clangd = {
+          filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+        },
+      }
 
-			-- LSP Servers setup
-			local servers = {
-				"tailwindcss",
-				"lua_ls",
-				"gopls",
-				"html",
-				"cssls",
-				"bashls",
-				"jsonls",
-				"ts_ls",
-				"astro",
-				"dartls",
-			}
+      for server, opts in pairs(servers) do
+        opts.on_attach = on_attach
+        opts.capabilities = capabilities
+        lspconfig[server].setup(opts)
+      end
+    end,
+  },
 
-			for _, server in ipairs(servers) do
-				require("lspconfig")[server].setup({
-					on_attach = on_attach,
-					capabilities = capabilities,
-				})
-			end
+  {
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "saadparwaiz1/cmp_luasnip",
+      "L3MON4D3/LuaSnip",
+    },
+    config = function()
+      local cmp = require("cmp")
+      local luasnip = require("luasnip")
+      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
-			require("lspconfig").clangd.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-				filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
-			})
+      require("luasnip.loaders.from_vscode").lazy_load()
 
-			-- CMP setup
-			local cmp = require("cmp")
-			local luasnip = require("luasnip")
-			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
+        },
+        mapping = cmp.mapping.preset.insert({
+          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
+          ["<C-j>"] = cmp.mapping.select_next_item(),
+          ["<C-k>"] = cmp.mapping.select_prev_item(),
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+        }),
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        sources = cmp.config.sources({
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
+          { name = "buffer" },
+        }),
+      })
 
-			cmp.setup({
-				snippet = {
-					expand = function(args)
-						luasnip.lsp_expand(args.body)
-					end,
-				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-
-					["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-					["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-
-					["<C-d>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_next_item()
-						elseif luasnip.expand_or_jumpable() then
-							luasnip.expand_or_jump()
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-
-					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item()
-						elseif luasnip.jumpable(-1) then
-							luasnip.jump(-1)
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-				}),
-				window = {
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered(),
-				},
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-				}, {
-					{ name = "buffer" },
-				}),
-			})
-
-			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-		end,
-	},
+      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+    end,
+  },
 }
