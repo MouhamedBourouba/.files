@@ -1,12 +1,7 @@
 #!/bin/bash
 
-local selected
-selected=$(find ~/Development/projects/ -maxdepth 1 -mindepth 1 -type d | fzf) || return
-
-local selected_name
+selected=$(find ~/Development/projects/ -maxdepth 1 -mindepth 1 -type d | fzf) || exit 1 
 selected_name=$(basename "$selected" | tr . _)
-
-local tmux_running
 tmux_running=$(pgrep tmux)
 
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
