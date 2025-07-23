@@ -35,3 +35,13 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
 vim.keymap.set("n", "J", "mzJ`z")
+
+vim.keymap.set("n", "-", ":Ex<CR>")
+
+vim.keymap.set("t", "<C-c>", "<C-\\><C-n>")
+
+vim.keymap.set("i", "jj", "<ESC>")
+-- vim.keymap.set("i", "<ESC>", function() print("use jj plz") end)
+
+-- for netrw
+vim.keymap.set('n', '<C-c>', ':bw<CR>', { noremap = true, silent = true })

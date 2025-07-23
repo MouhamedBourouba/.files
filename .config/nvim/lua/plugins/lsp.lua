@@ -44,7 +44,10 @@ return {
         astro = {},
         dartls = {},
         svelte = {},
-        tailwindcss = {},
+        dockerls = {},
+        tailwindcss = {
+          filetypes = { "html", "css", "scss", "javascript", "typescript", "javascriptreact", "typescriptreact", "svelte" }
+        },
         clangd = {
           filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
         },
