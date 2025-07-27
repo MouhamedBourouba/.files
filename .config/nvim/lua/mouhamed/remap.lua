@@ -45,3 +45,5 @@ vim.keymap.set("i", "jj", "<ESC>")
 
 -- for netrw
 vim.keymap.set('n', '<C-c>', ':bw<CR>', { noremap = true, silent = true })
+
+vim.keymap.set("x", "R", ":s###g<left><left><left>", { desc = "Start replacement in selected range" })

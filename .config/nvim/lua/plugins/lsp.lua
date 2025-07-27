@@ -63,11 +63,12 @@ return {
 
   {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "saadparwaiz1/cmp_luasnip",
       "L3MON4D3/LuaSnip",
+      "rafamadriz/friendly-snippets",
     },
     config = function()
       local cmp = require("cmp")
