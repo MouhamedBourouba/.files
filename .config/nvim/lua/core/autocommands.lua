@@ -1,0 +1,21 @@
+-- some times i hit w before realesing shift
+vim.api.nvim_create_user_command("W", function()
+  vim.api.nvim_command("wa")
+end, { nargs = 0 })
+vim.api.nvim_create_user_command("Wa", function()
+  vim.api.nvim_command("wa")
+end, { nargs = 0 })
+vim.api.nvim_create_user_command("WA", function()
+  vim.api.nvim_command("wa")
+end, { nargs = 0 })
+vim.api.nvim_create_user_command("Wq", function()
+  vim.api.nvim_command("wq")
+end, { nargs = 0 })
+vim.api.nvim_create_user_command("WQ", function()
+  vim.api.nvim_command("wq")
+end, { nargs = 0 })
+
+-- run shell command and put it in quick fix list
+vim.api.nvim_create_user_command("Rcmd", function(args)
+  vim.api.nvim_command('cexpr system("' .. args.args .. '")')
+end, { nargs = 1 })
