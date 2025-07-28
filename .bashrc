@@ -19,8 +19,8 @@ alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
 
-alias ls='eza --sort extension --color=auto'
-alias la='eza --sort extension -alh'
+alias ls='eza --color=auto'
+alias la='eza -alh'
 
 alias vim="nvim"
 alias ev="$EDITOR ~/.config/nvim/init.lua"

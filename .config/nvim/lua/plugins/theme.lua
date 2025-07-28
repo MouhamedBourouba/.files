@@ -1,35 +1,10 @@
--- return {
---   {
---     "catppuccin/nvim",
---     name = "catppuccin",
---     config = function()
---       -- vim.cmd("colorscheme catppuccin-mocha")
---     end,
---   },
--- }
-return {
-  {
-    "projekt0n/github-nvim-theme",
-    name = "github-theme",
-  },
-  {
-    lazy = false,
-    "rose-pine/neovim",
-    name = "rose-pine",
-    config = function()
-      vim.cmd("colorscheme rose-pine-moon")
-    end,
-  },
-  {
-    "rebelot/kanagawa.nvim",
-    config = function()
-      require("kanagawa").setup({
-        compile = true
-      })
-    end,
-  },
-  {
-    "echasnovski/mini.statusline",
-    opts = {},
-  },
+vim.pack.add { 
+  "https://github.com/projekt0n/github-nvim-theme",
+  "https://github.com/rebelot/kanagawa.nvim",
+  "https://github.com/rose-pine/neovim",
+  "https://github.com/echasnovski/mini.statusline",
 }
+
+
+vim.cmd("colorscheme rose-pine-moon")
+require("mini.statusline").setup()
