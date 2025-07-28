@@ -4,7 +4,7 @@ HISTSIZE=1000
 HISTFILESIZE=2000
 HISTCONTROL=ignoredups:ignorespace
 
-export EDITOR="nvim"
+export EDITOR="vim"
 export MANPAGER="nvim +Man!"
 
 export PATH="$PATH:$HOME/go/bin"
@@ -22,7 +22,7 @@ alias cp='cp -i'
 alias ls='eza --color=auto'
 alias la='eza -alh'
 
-alias vim="nvim"
+alias nim="nvim"
 alias ev="$EDITOR ~/.config/nvim/init.lua"
 alias ei="$EDITOR ~/.config/i3/config"
 

@@ -94,6 +94,9 @@ function on_attach()
   vim.keymap.set("n", "go", fzf.lsp_code_actions)
   vim.keymap.set("n", "gi", fzf.lsp_implementations, { desc = "lsp implementations" })
   vim.keymap.set("n", "gy", fzf.lsp_typedefs, { desc = "lsp type definitions" })
+  vim.keymap.set("n", "grn", vim.lsp.buf.rename)
+  vim.keymap.set("n", "K", vim.lsp.buf.hover)
+  vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help)
 end
 
 local servers = {
@@ -224,6 +227,5 @@ vim.keymap.set("n", "<leader>/", fzf.live_grep, { desc = "Find string (livegrep)
 vim.keymap.set("n", "<leader>g", fzf.git_status, { desc = "Find changed" })
 vim.keymap.set("n", "<leader>b", fzf.buffers, { desc = "Find buffers" })
 vim.keymap.set("n", "<leader>z", fzf.zoxide, { desc = "Find zoxide" })
-vim.keymap.set("n", "<leader>sc", fzf.git_bcommits, { desc = "Find buffer commits" })
 vim.keymap.set("n", "<leader>sb", fzf.git_branches, { desc = "Find git branches" })
-vim.keymap.set("n", "<leader>sC", fzf.git_commits, { desc = "Find commits" })
+vim.keymap.set("n", "<leader>sc", fzf.git_commits, { desc = "Find commits" })
