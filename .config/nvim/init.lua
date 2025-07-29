@@ -1,5 +1,6 @@
 -- prevent color flickring by loading the theme as the first thing
 require("plugins.theme")
+require("plugins.autosave")
 
 require("core.options")
 require("core.autocommands")

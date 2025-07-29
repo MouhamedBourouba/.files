@@ -4,7 +4,12 @@ font pango:NotoSans 6
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
-exec --no-startup-id setxkbmap -option caps:escape
+
+exec_always xrandr --output DP-1 --mode 1920x1080
+exec_always wallpaper
+exec_always setxkbmap -layout us,ara -option grp:alt_shift_toggle
+exec_always --no-startup-id sh -c "sleep 1 && xmodmap ~/.Xmodmap"
+exec_always --no-startup-id setxkbmap -option caps:escape
 
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
@@ -110,11 +115,6 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
-
-exec_always xrandr --output DP-1 --mode 1920x1080
-exec_always wallpaper
-exec_always setxkbmap -layout us,ara -option grp:alt_shift_toggle
-exec_always --no-startup-id sh -c "sleep 1 && xmodmap ~/.Xmodmap"
 
 # bar
 bar {

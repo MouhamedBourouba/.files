@@ -31,6 +31,8 @@ vim.keymap.set("v", ">", ">gv")
 
 vim.keymap.set("n", "J", "mzJ`z")
 
+vim.keymap.set("n", "gw", "<C-w>")
+
 vim.keymap.set("t", "<C-c>", "<C-\\><C-n>")
 
 vim.keymap.set("i", "jj", "<ESC>")

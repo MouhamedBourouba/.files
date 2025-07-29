@@ -45,12 +45,12 @@ vim.pack.add {
   "https://github.com/nvim-tree/nvim-web-devicons",
 }
 
+local lspconfig = require("lspconfig")
+local fzf = require("fzf-lua")
 local cmp = require("cmp")
 local types = require("cmp.types")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local lspconfig = require("lspconfig")
 local luasnip = require("luasnip")
-local fzf = require("fzf-lua")
 
 fzf.setup {
   "hide",
@@ -87,8 +87,8 @@ fzf.register_ui_select()
 function on_attach()
   vim.keymap.set("n", "<leader>j", fzf.lsp_document_symbols, { desc = "Find lsp symbols (jump)" })
   vim.keymap.set("n", "<leader>J", fzf.lsp_live_workspace_symbols, { desc = "Find lsp workspace symbols (Jump)" })
-  vim.keymap.set("n", "<leader>i", fzf.lsp_document_diagnostics, { desc = "Find diagnostics" })
-  vim.keymap.set("n", "<leader>I", fzf.lsp_workspace_diagnostics, { desc = "Find workspace diagnostics" })
+  vim.keymap.set("n", "<leader>I", fzf.lsp_document_diagnostics, { desc = "Find diagnostics" })
+  vim.keymap.set("n", "<leader>i", fzf.lsp_workspace_diagnostics, { desc = "Find workspace diagnostics" })
   vim.keymap.set("n", "gd", fzf.lsp_definitions)
   vim.keymap.set("n", "gr", fzf.lsp_references)
   vim.keymap.set("n", "go", fzf.lsp_code_actions)

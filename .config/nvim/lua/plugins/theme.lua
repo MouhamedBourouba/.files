@@ -1,4 +1,4 @@
-vim.pack.add { 
+vim.pack.add {
   "https://github.com/projekt0n/github-nvim-theme",
   "https://github.com/rebelot/kanagawa.nvim",
   "https://github.com/rose-pine/neovim",
@@ -6,5 +6,5 @@ vim.pack.add {
 }
 
 
-vim.cmd("colorscheme rose-pine-moon")
+vim.cmd("colorscheme github_dark_high_contrast")
 require("mini.statusline").setup()
