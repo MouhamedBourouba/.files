@@ -1,7 +1,7 @@
 syntax on
 filetype plugin indent on
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 set guifont=Iosevka\ 20
 set guioptions-=m
@@ -19,9 +19,84 @@ set iminsert=0
 set imsearch=0
 set autoindent
 set autochdir
+
 colorscheme habamax
 
 autocmd BufEnter * if &filetype == "go" | setlocal noexpandtab
 autocmd BufNewFile,BufRead ?\+.c3 setf c
 
 map gf :e <cfile><CR>
+
+nnoremap <Esc> :nohlsearch<CR>
+
+" Tab navigation
+nnoremap <C-t> gT
+nnoremap ^ <C-^>
+nnoremap <C-^> :b#<CR>
+nnoremap <C-p> :ls<CR>:buffer 
+
+" Quickfix navigation
+nnoremap [[ :cnext<CR>
+nnoremap ]] :cNext<CR>
+
+" Clipboard operations
+nnoremap <leader>p "+p
+vnoremap <leader>p "+p
+xnoremap <leader>p "+p
+
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+xnoremap <leader>y "+y
+
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+xnoremap <leader>d "_d
+
+" Centered search navigation
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+" Also in insert/visual mode
+inoremap <C-d> <C-d>zz
+vnoremap <C-d> <C-d>zz
+nnoremap <C-d> <C-d>zz
+
+inoremap <C-u> <C-u>zz
+vnoremap <C-u> <C-u>zz
+nnoremap <C-u> <C-u>zz
+
+" Stay in visual mode when shifting
+vnoremap < <gv
+vnoremap > >gv
+
+" Better line joining
+nnoremap J mzJ`z
+
+" Window control
+nnoremap gw <C-w>
+
+" Insert mode escape
+inoremap jj <ESC>
+
+" Close buffer
+nnoremap <silent> <C-c> :bw<CR>
+
+" Save and quit
+nnoremap <leader>w :wa<CR>
+nnoremap <leader>q :q<CR>
+
+" Open netrw
+nnoremap <leader>e :Ex<CR>
+
+" Replace in visual mode
+xnoremap R :s###g<left><left><left>
+
+command! W  wa
+command! Wa wa
+command! WA wa
+command! Wq wq
+command! WQa wqa
+command! Wqa wqa
+command! WQ wq
