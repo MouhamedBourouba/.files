@@ -4,7 +4,7 @@ HISTSIZE=1000
 HISTFILESIZE=2000
 HISTCONTROL=ignoredups:ignorespace
 
-export EDITOR="vim"
+export EDITOR="nvim"
 export MANPAGER="nvim +Man!"
 
 export PATH="$PATH:$HOME/go/bin"
