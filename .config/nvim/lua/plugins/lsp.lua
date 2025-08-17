@@ -36,7 +36,7 @@ vim.pack.add {
 
   "https://github.com/L3MON4D3/LuaSnip",
   "https://github.com/saadparwaiz1/cmp_luasnip",
-  "https://github.com/rafamadriz/friendly-snippets",
+  -- "https://github.com/rafamadriz/friendly-snippets",
 
   "https://github.com/windwp/nvim-autopairs",
   "https://github.com/windwp/nvim-ts-autotag",
@@ -111,6 +111,7 @@ local servers = {
   dartls = {},
   svelte = {},
   dockerls = {},
+  -- golangci_lint_ls = {},
   tailwindcss = {
     filetypes = { "html", "css", "scss", "javascript", "typescript", "javascriptreact", "typescriptreact", "svelte" }
   },
@@ -203,9 +204,10 @@ cmp.setup(opts)
 
 -- Snippet
 require("luasnip").config.setup { history = true }
-require("luasnip.loaders.from_vscode").lazy_load()
-vim.keymap.set({ "n", "i" }, "<Tab>", function() require("luasnip").jump(1) end)
-vim.keymap.set({ "n", "i" }, "<S-Tab>", function() require("luasnip").jump(-1) end)
+-- require("luasnip.loaders.from_vscode").lazy_load()
+-- annoying as fuck
+-- vim.keymap.set({ "n", "i" }, "<Tab>", function() require("luasnip").jump(1) end)
+-- vim.keymap.set({ "n", "i" }, "<S-Tab>", function() require("luasnip").jump(-1) end)
 
 -- Auto pairs
 require("nvim-autopairs").setup {}
