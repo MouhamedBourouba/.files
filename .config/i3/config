@@ -4,6 +4,7 @@ font pango:NotoSans 6
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
+exec --no-startup-id dunst
 
 exec_always xrandr --output DP-1 --mode 1920x1080
 exec_always wallpaper

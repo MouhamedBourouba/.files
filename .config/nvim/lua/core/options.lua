@@ -28,3 +28,5 @@ vim.opt.showmode = false
 vim.opt.laststatus = 3
 vim.go.guicursor = "n-v-sm:block,i-t-ci-ve-c:ver25,r-cr-o:hor20"
 vim.opt.fillchars = { eob = " " }
+
+vim.opt.fillchars:append { vert = "│" }
