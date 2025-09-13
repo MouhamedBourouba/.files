@@ -12,6 +12,8 @@ exec_always setxkbmap -layout us,ara -option grp:alt_shift_toggle
 exec_always --no-startup-id sh -c "sleep 1 && xmodmap ~/.Xmodmap"
 exec_always --no-startup-id setxkbmap -option caps:escape
 
+bindsym ctrl+f exec /home/mouhamed/.config/scripts/tmux_session 2>&1 >> /tmp/tmux_session.log
+
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status

@@ -44,7 +44,7 @@ export PNPM_HOME="$HOME/.local/share/pnpm"
 [[ ":$PATH:" != *":$PNPM_HOME:"* ]] && export PATH="$PNPM_HOME:$PATH"
 
 
-bind '"\C-f":"tmux_session\n"'
+bind '"\C-f":"tmux_session_fzf\n"'
 
 RED="\[\033[0;31m\]"
 GREEN="\[\033[0;32m\]"
