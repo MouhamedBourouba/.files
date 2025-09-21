@@ -13,6 +13,7 @@ require("conform").setup({
     go = { "gofmt", "goimports" },
     javascript = { "prettierd", "prettier" },
     typescript = { "prettierd", "prettier" },
+    python = { "black", "isort" },
     c = { "clang_format" },
     cpp = { "clang_format" },
     kotlin = { "ktlint" },

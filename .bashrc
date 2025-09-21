@@ -10,6 +10,7 @@ export MANPAGER="nvim +Man!"
 export PATH="$PATH:$HOME/go/bin"
 export PATH="$PATH:$HOME/Android/Sdk/platform-tools"
 export PATH="$PATH:$HOME/Android/Sdk/emulator"
+export PATH="$PATH:$HOME/Development/tools/bin"
 export PATH="$PATH:$HOME/.config/scripts"
 
 shopt -s histappend

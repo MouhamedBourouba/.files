@@ -106,6 +106,7 @@ local servers = {
   cssls = {},
   bashls = {},
   jsonls = {},
+  pyright = {},
   ts_ls = {},
   astro = {},
   dartls = {},

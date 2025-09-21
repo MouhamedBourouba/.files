@@ -8,7 +8,7 @@ project_dirs=(
 
 project_list=$(find "${project_dirs[@]}" -maxdepth 1 -mindepth 1 -xtype d 2>/dev/null)
 project_list_base=$(echo "${project_list}" | xargs -n1 basename)
-selected=$(echo "${project_list_base}" | rofi -dmenu -p "Select project") || exit 1
+selected=$(echo "${project_list_base}" | rofi -dmenu -p "Select project" -matching fuzzy) || exit 1
 
 selected_path=""
 for dir in "${project_dirs[@]}"; do
