@@ -100,23 +100,24 @@ function on_attach()
 end
 
 local servers = {
-  lua_ls = {},
-  gopls = {},
-  html = {},
-  cssls = {},
-  bashls = {},
-  jsonls = {},
-  pyright = {},
-  ts_ls = {},
-  astro = {},
-  dartls = {},
-  svelte = {},
-  dockerls = {},
+  lua_ls         = {},
+  gopls          = {},
+  fsautocomplete = {},
+  html           = {},
+  cssls          = {},
+  bashls         = {},
+  jsonls         = {},
+  pyright        = {},
+  ts_ls          = {},
+  astro          = {},
+  dartls         = {},
+  svelte         = {},
+  dockerls       = {},
   -- golangci_lint_ls = {},
-  tailwindcss = {
+  tailwindcss    = {
     filetypes = { "html", "css", "scss", "javascript", "typescript", "javascriptreact", "typescriptreact", "svelte" }
   },
-  clangd = {
+  clangd         = {
     filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
   },
 }

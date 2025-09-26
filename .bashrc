@@ -12,6 +12,7 @@ export PATH="$PATH:$HOME/Android/Sdk/platform-tools"
 export PATH="$PATH:$HOME/Android/Sdk/emulator"
 export PATH="$PATH:$HOME/Development/tools/bin"
 export PATH="$PATH:$HOME/.config/scripts"
+export PATH="$PATH:$HOME/.dotnet/tools"
 
 shopt -s histappend
 shopt -s checkwinsize

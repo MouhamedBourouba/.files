@@ -6,7 +6,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 exec --no-startup-id dunst
 
-exec_always --no-startup-i dxrandr --output DP-1 --mode 1920x1080
+exec_always --no-startup-id xrandr --output DP-1 --mode 1920x1080
 exec_always --no-startup-id setxkbmap -layout us,ara -option grp:alt_shift_toggle
 exec_always --no-startup-id feh Pictures/Wallpapers/windows10.png --bg-fill
 exec_always --no-startup-id sh -c "sleep 1 && xmodmap ~/.Xmodmap"
