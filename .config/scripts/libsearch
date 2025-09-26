@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+pkg-config --list-all \
+  | sort \
+  | fzf --prompt="pkg-config > " \
+        --preview='
+          echo "[CFLAGS]"
+          pkg-config --cflags {1} 2>/dev/null
+          echo
+          echo "[LIBS]"
+          pkg-config --libs {1} 2>/dev/null
+        ' \
+        --preview-window=right:wrap:30% \
+  | awk "{print \$1}" \
+  | xargs -r -I{} pkg-config --cflags --libs {}
