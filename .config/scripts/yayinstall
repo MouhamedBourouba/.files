@@ -1,3 +1,3 @@
 #!/bin/sh
 
-pacman -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S
+yay -Slq | fzf --multi --preview 'yay -Si {1}' --preview-window=right:wrap:65% | xargs -ro yay -S

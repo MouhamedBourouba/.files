@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-pkg-config --list-all \
+pkg-config --list-package-names \
   | sort \
   | fzf --prompt="pkg-config > " \
         --preview='
@@ -13,4 +13,5 @@ pkg-config --list-all \
         ' \
         --preview-window=right:wrap:70% \
   | awk "{print \$1}" \
-  | xargs -r -I{} pkg-config --cflags --libs {}
+  | xargs -r -I{} pkg-config --cflags --libs {} \
+  | tee >(xsel -b)

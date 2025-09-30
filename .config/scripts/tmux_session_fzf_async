@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/env bash
 set -eu
 
 project_dirs=(
@@ -8,7 +8,7 @@ project_dirs=(
 
 project_list=$(find "${project_dirs[@]}" -maxdepth 1 -mindepth 1 -xtype d 2>/dev/null)
 project_list_base=$(echo "${project_list}" | xargs -n1 basename)
-selected=$(echo "${project_list_base}" | rofi -dmenu -p "Select project" -matching fuzzy) || exit 1
+selected=$(echo "${project_list_base}" | fzf)
 
 selected_path=""
 for dir in "${project_dirs[@]}"; do
@@ -38,7 +38,8 @@ if ! tmux has-session -t="$selected_name" 2>/dev/null; then
 fi
 
 if [[ "$tmux_clients" -eq 0 ]]; then
-  exec alacritty -e tmux attach-session -t "$selected_name"
+  nohup alacritty -e tmux attach-session -t "$selected_name" &
+  sleep 0.01
 else
   tmux switch-client -t "$selected_name"
 fi
