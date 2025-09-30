@@ -39,7 +39,7 @@ vim.keymap.set('n', '<C-c>', ':bw<CR>', { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>w", ":wa<CR>")
 
-vim.keymap.set("n", "<leader>e", ":Ex<CR>")
+-- vim.keymap.set("n", "<leader>e", ":Ex<CR>")
 
 vim.keymap.set("x", "R", ":s###g<left><left><left>")
 

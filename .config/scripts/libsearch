@@ -11,6 +11,6 @@ pkg-config --list-all \
           echo "[LIBS]"
           pkg-config --libs {1} 2>/dev/null
         ' \
-        --preview-window=right:wrap:30% \
+        --preview-window=right:wrap:70% \
   | awk "{print \$1}" \
   | xargs -r -I{} pkg-config --cflags --libs {}

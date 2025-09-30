@@ -12,7 +12,10 @@ exec_always --no-startup-id feh Pictures/Wallpapers/windows10.png --bg-fill
 exec_always --no-startup-id sh -c "sleep 1 && xmodmap ~/.Xmodmap"
 exec_always --no-startup-id setxkbmap -option caps:escape
 
-bindsym $mod+p exec /home/mouhamed/.config/scripts/tmux_session 2>&1 >> /tmp/tmux_session.log
+bindsym $mod+i exec alacritty --title "script" -e /home/mouhamed/.config/scripts/yayinstall
+bindsym $mod+p exec alacritty --title "script" -e /home/mouhamed/.config/scripts/tmux_session_fzf
+
+for_window [class="Alacritty" title="script"] floating enable, move position center, resize set 1200 800, move position center
 
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status

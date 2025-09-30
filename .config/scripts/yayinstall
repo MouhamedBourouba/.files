@@ -1,0 +1,3 @@
+#!/bin/sh
+
+pacman -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S
