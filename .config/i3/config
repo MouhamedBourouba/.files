@@ -6,7 +6,10 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 exec --no-startup-id dunst
 
-exec_always --no-startup-id xrandr --output DP-1 --mode 1920x1080
+## new gpu new life
+# exec_always --no-startup-id xrandr --output DP-1 --mode 1920x1080
+exec_always --no-startup-id xrandr --output DP-4 --mode 1920x1080
+exec_always --no-startup-id xrandr --output HDMI-1 --mode 1920x1080 --rate 59.94
 exec_always --no-startup-id setxkbmap -layout us,ara -option grp:alt_shift_toggle
 exec_always --no-startup-id feh Pictures/Wallpapers/windows10.png --bg-fill
 exec_always --no-startup-id sh -c "sleep 0.1 && xmodmap ~/.Xmodmap"
@@ -14,7 +17,7 @@ exec_always --no-startup-id setxkbmap -option caps:escape
 
 ## CUSTOM SCRIPTS
 bindsym $mod+i exec alacritty --title "script-install" -e /home/mouhamed/.config/scripts/yayinstall
-bindsym $mod+p exec alacritty --title "script-session" -e /home/mouhamed/.config/scripts/tmux_session_fzf_async
+bindsym $mod+p exec /home/mouhamed/.config/scripts/tmux_session_rofi
 
 ## MAKE SCRIPT TERMINAL FLOAT
 for_window [class="Alacritty" title="script-install"] floating enable, move position center, resize set 1200 800, move position center
