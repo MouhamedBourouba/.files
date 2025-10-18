@@ -1,9 +1,9 @@
 #!/bin/sh
-set -eu
+# set -eu
 
 project_dirs=(
-  "$HOME/Development/projects/"
-  "$HOME/Development/intellectsoft/"
+  "$HOME/Development/personal/"
+  "$HOME/Development/intellectSoft/"
 )
 
 project_list=$(find "${project_dirs[@]}" -maxdepth 1 -mindepth 1 -xtype d 2>/dev/null)

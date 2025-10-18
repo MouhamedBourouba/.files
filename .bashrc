@@ -38,8 +38,8 @@ alias cd='z'
 
 [[ -x /usr/bin/lesspipe ]] && eval "$(SHELL=/bin/sh lesspipe)"
 
-if [[ -f /etc/bash_completion ]] && ! shopt -oq posix; then
-  source /etc/bash_completion
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+  . /usr/share/bash-completion/bash_completion
 fi
 
 export PNPM_HOME="$HOME/.local/share/pnpm"
