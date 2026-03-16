@@ -10,7 +10,7 @@ require("conform").setup({
     timeout_ms = 1000,
   },
   formatters_by_ft = {
-    go = { "gofmt", "goimports" },
+    go = { "gofmt" },
     javascript = { "prettierd", "prettier" },
     typescript = { "prettierd", "prettier" },
     python = { "black", "isort" },

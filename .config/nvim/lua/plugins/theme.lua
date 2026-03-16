@@ -3,6 +3,7 @@ vim.pack.add {
   "https://github.com/rebelot/kanagawa.nvim",
   "https://github.com/rose-pine/neovim",
   "https://github.com/echasnovski/mini.statusline",
+  "https://github.com/shaunsingh/nord.nvim",
 }
 
 

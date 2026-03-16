@@ -84,13 +84,12 @@ fzf.setup {
 
 fzf.register_ui_select()
 
-function on_attach()
+local function on_attach()
   vim.keymap.set("n", "<leader>j", fzf.lsp_document_symbols, { desc = "Find lsp symbols (jump)" })
   vim.keymap.set("n", "<leader>J", fzf.lsp_live_workspace_symbols, { desc = "Find lsp workspace symbols (Jump)" })
-  vim.keymap.set("n", "<leader>I", fzf.lsp_document_diagnostics, { desc = "Find diagnostics" })
-  vim.keymap.set("n", "<leader>i", fzf.lsp_workspace_diagnostics, { desc = "Find workspace diagnostics" })
+  vim.keymap.set("n", "<leader>i", fzf.lsp_document_diagnostics, { desc = "Find diagnostics" })
+  vim.keymap.set("n", "<leader>I", fzf.lsp_workspace_diagnostics, { desc = "Find workspace diagnostics" })
   vim.keymap.set("n", "gd", fzf.lsp_definitions)
-  vim.keymap.set("n", "gr", fzf.lsp_references)
   vim.keymap.set("n", "go", fzf.lsp_code_actions)
   vim.keymap.set("n", "gi", fzf.lsp_implementations, { desc = "lsp implementations" })
   vim.keymap.set("n", "gy", fzf.lsp_typedefs, { desc = "lsp type definitions" })
@@ -108,11 +107,16 @@ local servers = {
   bashls         = {},
   jsonls         = {},
   pyright        = {},
+  omnisharp      = {
+    cmd = { "/sbin/omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
+  },
   ts_ls          = {},
+  eslint         = {},
   astro          = {},
   dartls         = {},
   svelte         = {},
   dockerls       = {},
+  intelephense   = {},
   -- golangci_lint_ls = {},
   tailwindcss    = {
     filetypes = { "html", "css", "scss", "javascript", "typescript", "javascriptreact", "typescriptreact", "svelte" }
