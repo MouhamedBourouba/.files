@@ -1,7 +1,12 @@
 vim.pack.add {
   -- lsp
   "https://github.com/neovim/nvim-lspconfig",
-  "https://github.com/saghen/blink.cmp",
+
+  -- blink-cmp
+  {
+    src = "https://github.com/saghen/blink.cmp",
+    version = 'v1.10.1',
+  },
 
   -- snippets
   "https://github.com/rafamadriz/friendly-snippets",
