@@ -10,6 +10,7 @@ vim.opt.smartindent = true
 
 -- UX
 vim.opt.undofile = true
+vim.opt.undodir = vim.fn.stdpath("data") .. "/undo"
 vim.opt.updatetime = 250
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -26,7 +27,4 @@ vim.opt.breakindent = true
 vim.g.termguicolors = true
 vim.opt.showmode = false
 vim.opt.laststatus = 3
-vim.go.guicursor = "n-v-sm:block,i-t-ci-ve-c:ver25,r-cr-o:hor20"
 vim.opt.fillchars = { eob = " " }
-
-vim.opt.fillchars:append { vert = "│" }

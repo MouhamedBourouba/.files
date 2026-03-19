@@ -1,6 +1,5 @@
 vim.pack.add {
   "https://github.com/tpope/vim-surround.git",
-  "https://github.com/folke/flash.nvim",
   "https://github.com/tpope/vim-fugitive",
   "https://github.com/folke/zen-mode.nvim",
   "https://github.com/mbbill/undotree",

@@ -15,15 +15,10 @@ local function load_file(path)
 end
 
 coroutine.wrap(function()
-  local groups = {
-    vim.api.nvim_get_runtime_file("lua/plugins/*.lua", true),
-    vim.api.nvim_get_runtime_file("lua/languages/*.lua", true)
-  }
+  local plugins = vim.api.nvim_get_runtime_file("lua/plugins/*.lua", true);
 
-  for _, files in ipairs(groups) do
-    for _, path in ipairs(files) do
-      load_file(path)
-    end
+  for _, path in ipairs(plugins) do
+    load_file(path)
   end
 end)()
 
