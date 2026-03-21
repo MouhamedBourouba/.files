@@ -20,5 +20,5 @@ vim.keymap.set("n", "<leader>h", function()
   })
 end)
 
-vim.keymap.set("n", "<leader>;", ":Recompile")
-vim.keymap.set("n", "<leader>:", ":Compile")
+vim.keymap.set("n", "<leader>;", ":belowright Recompile<CR>")
+vim.keymap.set("n", "<leader>:", ":belowright Compile<CR>")
