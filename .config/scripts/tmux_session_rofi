@@ -6,6 +6,8 @@ project_dirs=(
   "$HOME/Development/intellectSoft/"
   "$HOME/Development/hoggar/"
   "$HOME/Development/mo3ad/"
+  "$HOME/Development/chihab/"
+  "$HOME/Development/fun/"
 )
 
 project_list=$(find "${project_dirs[@]}" -maxdepth 1 -mindepth 1 -xtype d 2>/dev/null)

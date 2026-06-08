@@ -3,5 +3,5 @@ vim.pack.add {
   "https://github.com/echasnovski/mini.statusline",
 }
 
-vim.cmd("colorscheme carbonfox")
+vim.cmd("colorscheme nightfox")
 require("mini.statusline").setup()

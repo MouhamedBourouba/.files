@@ -1,7 +1,7 @@
 [window]
 title = "Alacritty"
 blur = true
-opacity = 0.9
+opacity = 1
 padding.x = 1
 
 [window.dimensions]

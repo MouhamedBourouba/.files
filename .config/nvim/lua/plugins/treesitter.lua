@@ -3,7 +3,7 @@ vim.pack.add {
 }
 
 require("nvim-treesitter").install({
-  "c", "lua", "vim", "vimdoc", "query",
+  "c", "lua", "vim", "vimdoc", "query", "html",
   "markdown", "markdown_inline", "javascript", "go",
 })
 

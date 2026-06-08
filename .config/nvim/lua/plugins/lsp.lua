@@ -105,9 +105,14 @@ vim.lsp.config("golangci_lint_ls", {
   },
 })
 
+vim.lsp.config("ols", {
+  cmd = { 'odinls' }
+})
+
 vim.lsp.enable({
   "lua_ls",
   "gopls",
+  "golangci_lint_ls",
   "fsautocomplete",
   "html",
   "cssls",
@@ -124,6 +129,7 @@ vim.lsp.enable({
   "intelephense",
   "tailwindcss",
   "clangd",
+  "ols"
 })
 
 vim.lsp.config("*", {
