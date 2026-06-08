@@ -1,0 +1,7 @@
+require("plugins.theme")
+require("plugins.treesitter")
+require("plugins.fzf")
+require("plugins.conform")
+require("plugins.lsp")
+require("plugins.oil")
+require("plugins.utils")
