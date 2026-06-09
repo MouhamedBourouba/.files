@@ -4,7 +4,7 @@
 local browser     = "thorium-browser"
 local terminal    = "alacritty"
 local fileManager = "thunar"
-local menu        = "rofi -show run"
+local menu        = "rofi -show drun"
 
 -- =====================
 -- MONITOR
@@ -21,7 +21,6 @@ hl.monitor({
 -- =====================
 hl.on("hyprland.start", function()
   hl.exec_cmd(browser)
-  hl.exec_cmd("waybar")
   hl.exec_cmd("hyprpaper")
   hl.exec_cmd("nm-applet --indicator")
 end)
@@ -33,7 +32,7 @@ hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 
 -- =====================
--- THEME
+-- CONFIG
 -- =====================
 hl.config({
   general = {
@@ -100,13 +99,6 @@ hl.animation({ leaf = "workspacesIn", enabled = false, speed = 1.21, bezier = "a
 hl.animation({ leaf = "workspacesOut", enabled = false, speed = 1.94, bezier = "almostLinear", style = "fade" })
 
 -- =====================
--- LAYOUTS
--- =====================
-hl.config({ dwindle = { preserve_split = true } })
-hl.config({ master = { new_status = "master" } })
-hl.config({ scrolling = { fullscreen_on_one_column = true } })
-
--- =====================
 -- SMART GAPS
 -- =====================
 hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
@@ -147,31 +139,23 @@ hl.config({
     kb_rules     = "",
     follow_mouse = 1,
     sensitivity  = 0,
-    touchpad     = { natural_scroll = false },
+    touchpad     = { natural_scroll = true },
   },
 })
 
 -- =====================
 -- WINDOW RULES
 -- =====================
-local suppressMaximizeRule = hl.window_rule({
+hl.window_rule({
   name           = "suppress-maximize-events",
   match          = { class = ".*" },
   suppress_event = "maximize",
-})
-suppressMaximizeRule:set_enabled(true)
+}):set_enabled(true)
 
 hl.window_rule({
   name     = "fix-xwayland-drags",
   match    = { class = "^$", title = "^$", xwayland = true, float = true, fullscreen = false, pin = false },
   no_focus = true,
-})
-
-hl.window_rule({
-  name  = "move-hyprland-run",
-  match = { class = "hyprland-run" },
-  move  = "20 monitor_h-120",
-  float = true,
 })
 
 hl.window_rule({
@@ -194,10 +178,6 @@ hl.window_rule({
 -- KEYBINDINGS
 -- =====================
 local mainMod = "SUPER"
-
-local exitWayland = function()
-  hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")
-end
 
 local toggleLayout = function()
   local currentWorkspace = hl.get_active_workspace()
@@ -222,6 +202,7 @@ hl.bind(mainMod .. " + P", exec_cmd('/home/mouhamed/.config/scripts/tmux_session
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + J", hl.dsp.window.cycle_next())
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + SHIFT + J", hl.dsp.layout("togglesplit"))
 
 -- layout toggle

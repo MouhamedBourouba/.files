@@ -2,7 +2,7 @@
 set -eu
 
 project_dirs=(
-  "$HOME/Development/personal//"
+  "$HOME/Development/personal/"
   "$HOME/Development/intellectSoft/"
   "$HOME/Development/hoggar/"
   "$HOME/Development/mo3ad/"

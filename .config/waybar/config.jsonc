@@ -1,0 +1,125 @@
+{
+  "layer": "top",
+  "position": "bottom",
+  "height": 26,
+  "spacing": 0,
+  "reload_style_on_change": true,
+  "modules-left": [
+    "hyprland/workspaces",
+    "hyprland/window"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "tray",
+    "network#speed",
+    "disk",
+    "custom/cpumem",
+    "temperature",
+    "pulseaudio",
+    "network",
+    "custom/date"
+  ],
+  "hyprland/workspaces": {
+    "on-click": "activate",
+    "format": "{icon}",
+    "format-icons": {
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "active": "󱓻",
+      "default": ""
+    },
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": []
+    }
+  },
+  "hyprland/window": {
+    "format": "{}",
+    "max-length": 35,
+    "separate-outputs": true
+  },
+  "clock": {
+    "format": "  {:%H:%M}",
+    "tooltip-format": "<big>{:%B %Y}</big>\n<tt>{calendar}</tt>"
+  },
+  "custom/date": {
+    "exec": "date +'%a %d %b'",
+    "interval": 60,
+    "format": "  {}",
+    "tooltip": false
+  },
+  // ─── CPU + Memory combined ──────────────────────────────────
+  "custom/cpumem": {
+    "exec": "echo \"󰍛  $(grep -o '^[0-9]*' /proc/loadavg)%  $(free -h | awk '/^Mem:/ {print \"  \" $3}')\"",
+    "interval": 3,
+    "format": "{}",
+    "tooltip": false,
+    "on-click": "alacritty -e btop"
+  },
+  "disk": {
+    "interval": 30,
+    "format": "󰋊  {free}",
+    "format-alt": "󰋊  {percentage_used}%",
+    "path": "/",
+    "tooltip-format": "{used} / {total}  ({percentage_used}% used)\n{free} free"
+  },
+  "temperature": {
+    "interval": 5,
+    "format": "{icon}  {temperatureC}°C",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "critical-threshold": 80,
+    "format-critical": "  {temperatureC}°C",
+    "tooltip": false
+  },
+  "network": {
+    "format-wifi": "󰤨  {essid}",
+    "format-ethernet": "󰀂  Wired",
+    "format-disconnected": "󰤮  Off",
+    "tooltip-format-wifi": "{essid}  {signalStrength}%\n{ifname}  {ipaddr}",
+    "tooltip-format-ethernet": "{ifname}  {ipaddr}",
+    "tooltip-format-disconnected": "Disconnected",
+    "interval": 5,
+    "on-click": "nm-connection-editor"
+  },
+  "network#speed": {
+    "format": "󰁆  {bandwidthDownBytes}  󰁞  {bandwidthUpBytes}",
+    "interval": 2,
+    "tooltip-format-wifi": "{essid}  ↓ {bandwidthDownBits}  ↑ {bandwidthUpBits}",
+    "tooltip-format-ethernet": "↓ {bandwidthDownBits}  ↑ {bandwidthUpBits}"
+  },
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-muted": "󰝟  Muted",
+    "format-icons": {
+      "headphone": "",
+      "headset": "",
+      "default": [
+        "󰕿",
+        "󰖀",
+        "󰕾"
+      ]
+    },
+    "on-click": "pavucontrol",
+    "on-click-right": "pamixer -t",
+    "scroll-step": 5,
+    "tooltip-format": "{volume}%  —  {desc}"
+  },
+  "tray": {
+    "icon-size": 13,
+    "spacing": 8
+  }
+}
