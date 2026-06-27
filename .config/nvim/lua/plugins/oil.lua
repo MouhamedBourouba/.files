@@ -11,8 +11,7 @@ require("oil").setup({
     ["<CR>"] = "actions.select",
     ["<BS>"] = "actions.parent",
     ["Y"] = "actions.copy_entry_path",
-    ["<C-z>"] = "actions.open_terminal",
-    ["gi"] = ":! ",
+    ["&"] = "actions.open_cmdline",
   },
   skip_confirm_for_simple_edits = true,
   view_options = {
