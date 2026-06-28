@@ -1,0 +1,13 @@
+[Default Applications]
+inode/directory=nemo.desktop
+text/markdown=mousepad.desktop
+text/x-log=mousepad.desktop
+application/json=mousepad.desktop
+application/xml=mousepad.desktop
+text/xml=mousepad.desktop
+text/css=org.xfce.mousepad.desktop
+text/plain=org.xfce.mousepad.desktop
+
+[Added Associations]
+text/css=org.xfce.mousepad.desktop;
+text/plain=org.xfce.mousepad.desktop;
