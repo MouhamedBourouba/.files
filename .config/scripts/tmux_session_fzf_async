@@ -5,8 +5,6 @@ project_dirs=(
   "$HOME/Development/personal/"
   "$HOME/Development/intellectSoft/"
   "$HOME/Development/hoggar/"
-  "$HOME/Development/mo3ad/"
-  "$HOME/Development/chihab/"
   "$HOME/Development/fun/"
 )
 

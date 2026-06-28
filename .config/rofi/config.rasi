@@ -4,3 +4,155 @@ configuration {
   kb-accept-entry: "Return,KP_Enter";
   kb-remove-to-eol: "Alt+BackSpace";
 }
+
+* {
+    font: "Iosevka Nerd Font Medium 12";
+
+    bg0:      #2E3440;
+    bg1:      #3B4252;
+    bg2:      #434C5E;
+    fg0:      #ECEFF4;
+    fg1:      #D8DEE9;
+    accent:   #88C0D0;
+    urgent:   #EBCB8B;
+    border-col: #4C566A;
+
+    background-color: transparent;
+    text-color: @fg1;
+
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+window {
+    location: center;
+    width: 480;
+    background-color: @bg0;
+    border: 2px;
+    border-color: @border-col;
+    padding: 6px;
+}
+
+mainbox {
+    background-color: transparent;
+    children: [ inputbar, message, listview ];
+    spacing: 10px;
+}
+
+inputbar {
+    padding: 10px 12px;
+    spacing: 10px;
+    background-color: @bg1;
+    children: [ prompt, entry ];
+}
+
+prompt {
+    text-color: @accent;
+    font: "Iosevka Nerd Font Bold 12";
+}
+
+entry {
+    text-color: @fg0;
+    placeholder: "Search…";
+    placeholder-color: #6B7890;
+}
+
+message {
+    background-color: @bg1;
+    padding: 8px 12px;
+}
+
+textbox {
+    text-color: @fg1;
+    background-color: transparent;
+}
+
+listview {
+    padding: 6px 2px;
+    lines: 8;
+    columns: 1;
+    fixed-height: false;
+    scrollbar: true;
+    spacing: 4px;
+}
+
+scrollbar {
+    width: 4px;
+    handle-color: @bg2;
+    handle-width: 6px;
+    padding: 0 4px;
+}
+
+element {
+    padding: 8px 10px;
+    spacing: 10px;
+}
+
+element normal normal {
+    background-color: transparent;
+    text-color: @fg1;
+}
+element normal active {
+    background-color: transparent;
+    text-color: @accent;
+}
+element normal urgent {
+    background-color: transparent;
+    text-color: @urgent;
+}
+
+element alternate normal {
+    background-color: transparent;
+    text-color: @fg1;
+}
+element alternate active {
+    background-color: transparent;
+    text-color: @accent;
+}
+element alternate urgent {
+    background-color: transparent;
+    text-color: @urgent;
+}
+
+element selected normal {
+    background-color: @accent;
+    text-color: @bg0;
+}
+element selected active {
+    background-color: @accent;
+    text-color: @bg0;
+}
+element selected urgent {
+    background-color: @urgent;
+    text-color: @bg0;
+}
+
+element-icon {
+    size: 1.1em;
+    background-color: transparent;
+    vertical-align: 0.5;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    vertical-align: 0.5;
+}
+
+mode-switcher {
+    spacing: 6px;
+    margin: 4px 0 0 0;
+}
+
+button {
+    padding: 6px 10px;
+    background-color: @bg1;
+    text-color: @fg1;
+    horizontal-align: 0.5;
+}
+
+button selected {
+    background-color: @accent;
+    text-color: @bg0;
+}

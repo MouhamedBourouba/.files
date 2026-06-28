@@ -3,6 +3,7 @@
 export EDITOR="nvim"
 export MANPAGER="nvim +Man!"
 
+export PATH="/home/mouhamed/.local/bin:$PATH"
 export PATH="$PATH:$HOME/.go/bin"
 export PATH="$PATH:$HOME/Android/Sdk/platform-tools"
 export PATH="$PATH:$HOME/Android/Sdk/emulator"
@@ -45,11 +46,13 @@ parse_git_branch() {
 PS1="${CYAN}\u@\h ${YELLOW}\w${GREEN}\$(parse_git_branch)${RESET}\$ "
 
 command -v fzf &>/dev/null && source <(fzf --bash)
+
 export PNPM_HOME="$HOME/.local/share/pnpm"
 [[ ":$PATH:" != *":$PNPM_HOME:"* ]] && export PATH="$PNPM_HOME:$PATH"
+
 eval "$(zoxide init bash)"
+
 [[ -x /usr/bin/lesspipe ]] && eval "$(SHELL=/bin/sh lesspipe)"
 if [ -f /usr/share/bash-completion/bash_completion ]; then
   . /usr/share/bash-completion/bash_completion
 fi
-export PATH="/home/mouhamed/.local/bin:$PATH"
