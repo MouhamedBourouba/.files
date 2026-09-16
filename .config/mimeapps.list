@@ -7,6 +7,7 @@ application/xml=mousepad.desktop
 text/xml=mousepad.desktop
 text/css=org.xfce.mousepad.desktop
 text/plain=org.xfce.mousepad.desktop
+x-scheme-handler/discord-712465656758665259=discord-712465656758665259.desktop
 
 [Added Associations]
 text/css=org.xfce.mousepad.desktop;

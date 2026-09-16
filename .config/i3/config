@@ -1,6 +1,7 @@
 set $mod Mod4
 
 font pango:NotoSans 6
+
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
@@ -128,10 +129,11 @@ bindsym $mod+r mode "resize"
 
 # bar
 bar {
-  status_command i3status
-# disable scroll in bar
+  font pango:Iosevka Nerd Font 9
+  status_command i3status-rs
     bindsym button4 nop
     bindsym button5 nop
 }
 
 default_border pixel 2
+smart_borders on

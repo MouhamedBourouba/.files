@@ -1,3 +1,6 @@
 #!/bin/sh
 
 yay -Slq | fzf --multi --preview 'yay -Si {1}' --preview-window=right:wrap:65% | xargs -ro yay -S
+
+# echo "Press Enter to Exit"
+# read -s

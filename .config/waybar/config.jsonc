@@ -13,13 +13,12 @@
   ],
   "modules-right": [
     "tray",
-    "network#speed",
+    "cpu",
+    "memory",
     "disk",
-    "custom/cpumem",
-    "temperature",
-    "pulseaudio",
     "network",
-    "custom/date"
+    "pulseaudio",
+    "clock#status"
   ],
   "hyprland/workspaces": {
     "on-click": "activate",
@@ -46,48 +45,44 @@
     "max-length": 35,
     "separate-outputs": true
   },
+  // center clock, unstyled — this is your normal top clock
   "clock": {
     "format": "  {:%H:%M}",
     "tooltip-format": "<big>{:%B %Y}</big>\n<tt>{calendar}</tt>"
   },
-  "custom/date": {
-    "exec": "date +'%a %d %b'",
-    "interval": 60,
-    "format": "  {}",
-    "tooltip": false
-  },
-  // ─── CPU + Memory combined ──────────────────────────────────
-  "custom/cpumem": {
-    "exec": "echo \"󰍛  $(grep -o '^[0-9]*' /proc/loadavg)%  $(free -h | awk '/^Mem:/ {print \"  \" $3}')\"",
+  // ---------------- CPU ----------------
+  // mirrors block "cpu": info_cpu = 20, warning_cpu = 50, critical_cpu = 90
+  "cpu": {
     "interval": 3,
-    "format": "{}",
-    "tooltip": false,
+    "format": "  {usage}%",
+    "states": {
+      "warning": 50,
+      "critical": 90
+    },
     "on-click": "alacritty -e btop"
   },
+  // ---------------- RAM ----------------
+  // mirrors block "memory": format = " $icon $mem_used.eng(w:2) "
+  "memory": {
+    "interval": 3,
+    "format": "󰍛  {used:0.1f}GiB",
+    "tooltip-format": "{used:0.1f}GiB / {total:0.1f}GiB ({percentage}%)",
+    "on-click": "alacritty -e btop"
+  },
+  // ---------------- Disk ----------------
+  // mirrors block "disk_space": path "/", shows available space, warning 20GB, alert 10GB
   "disk": {
-    "interval": 30,
-    "format": "󰋊  {free}",
-    "format-alt": "󰋊  {percentage_used}%",
+    "interval": 20,
     "path": "/",
+    "format": "󰋊  {free}",
     "tooltip-format": "{used} / {total}  ({percentage_used}% used)\n{free} free"
   },
-  "temperature": {
-    "interval": 5,
-    "format": "{icon}  {temperatureC}°C",
-    "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "critical-threshold": 80,
-    "format-critical": "  {temperatureC}°C",
-    "tooltip": false
-  },
+  // ---------------- Network ----------------
+  // mirrors block "net": device wlan0, format " $icon $ip $ssid "
   "network": {
-    "format-wifi": "󰤨  {essid}",
-    "format-ethernet": "󰀂  Wired",
+    "interface": "wlan0",
+    "format-wifi": "󰤨  {ipaddr}  {essid}",
+    "format-ethernet": "󰀂  {ipaddr}",
     "format-disconnected": "󰤮  Off",
     "tooltip-format-wifi": "{essid}  {signalStrength}%\n{ifname}  {ipaddr}",
     "tooltip-format-ethernet": "{ifname}  {ipaddr}",
@@ -95,12 +90,8 @@
     "interval": 5,
     "on-click": "nm-connection-editor"
   },
-  "network#speed": {
-    "format": "󰁆  {bandwidthDownBytes}  󰁞  {bandwidthUpBytes}",
-    "interval": 2,
-    "tooltip-format-wifi": "{essid}  ↓ {bandwidthDownBits}  ↑ {bandwidthUpBits}",
-    "tooltip-format-ethernet": "↓ {bandwidthDownBits}  ↑ {bandwidthUpBits}"
-  },
+  // ---------------- Sound ----------------
+  // mirrors block "sound": format " $icon {$volume.eng(w:2) |}", max_vol 100
   "pulseaudio": {
     "format": "{icon}  {volume}%",
     "format-muted": "󰝟  Muted",
@@ -113,10 +104,17 @@
         "󰕾"
       ]
     },
+    "scroll-step": 5,
     "on-click": "pavucontrol",
     "on-click-right": "pamixer -t",
-    "scroll-step": 5,
     "tooltip-format": "{volume}%  —  {desc}"
+  },
+  // ---------------- Time (right-side, styled like the old i3status-rs bar) ----------------
+  // mirrors block "time": format = " $timestamp.datetime(f:'%a %d/%m %R') "
+  "clock#status": {
+    "interval": 5,
+    "format": "  {:%a %d/%m %R}",
+    "tooltip-format": "<big>{:%B %Y}</big>\n<tt>{calendar}</tt>"
   },
   "tray": {
     "icon-size": 13,
